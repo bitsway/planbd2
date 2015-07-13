@@ -904,7 +904,7 @@ function achiveDataSave(){
 				+'fdfd'+achGirls+'fdfd'+achBoys+'fdfd'+achDapMale+'fdfd'+achDapFemale+'fdfd'+achLatType+'fdfd'+achComDate
 				+'fdfd'+achTypeOfSchool+'fdfd'+nameOfpSchool+'fdfd'+nameOfsSchool+'fdfd'+achSchGirl+'fdfd'+achSchBoy+'fdfd'+achTeachFemale
 				+'fdfd'+achTeachMale+'fdfd'+achSchDFemale+'fdfd'+achSchDMale+'fdfd'+achSchRehabInsDate+'fdfd'+achSchWashCompDate
-				+'fdfd'+achOdfStatus+'fdfd'+achPlanActivities
+				+'fdfd'+achOdfStatus+'fdfd'+achPlanActivities+'fdfd'+achPhoto+'fdfd'+startDt+'fdfd'+latitude+'fdfd'+longitude
 				
 				if (achPlanId==''){
 					$(".errorChk").text("New records not available");
@@ -1283,6 +1283,15 @@ function reviewDataNext(){
 		
 		$("#achOdfStatus").val(achRevDetailsArray[28]);
 		
+		$("#achPhoto").val(achRevDetailsArray[30]);
+		
+		startDt=achRevDetailsArray[31]
+		var achlat=$("#ach_lat").val(achRevDetailsArray[32]);
+		var achlong=$("#ach_long").val(achRevDetailsArray[33]);
+					
+		var image = document.getElementById('myImageA');
+		image.src = achRevDetailsArray[30];
+		imagePathA = achRevDetailsArray[30];
 	
 		
 	
