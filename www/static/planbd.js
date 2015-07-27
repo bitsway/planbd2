@@ -1768,6 +1768,7 @@ function winAch(r) {
 //    console.log("Response = " + r.response);
 //    console.log("Sent = " + r.bytesSent);
 	$(".errorChk").text('File upload Successful. Syncing Data...');
+	
 	syncDataAch();
 }
 
