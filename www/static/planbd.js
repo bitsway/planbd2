@@ -90,6 +90,7 @@ var achEthFemale='';
 
 
 var achLatType='';
+var achLatTypePast='';
 var achComDate='';
 
 
@@ -106,7 +107,21 @@ var achSchDMale='';
 var achSchRehabInsDate='';
 var achSchWashCompDate='';
 
+var achLatRep='';
+var achLatBoy='';
+var achLatGirl='';
+var achLatTeacher='';
+var achNumOfTap='';
+
+var achRecHyMsg='';
+var achLocationHwDev='';
+var achAvailableHwdev='';
+var achAvailableSoap='';
+
 var achOdfStatus='';
+var achHH='';
+var	achOdfAdult='';
+var	achOdfChild='';	
 
 var achWpTech='';
 var achWpComDate='';
@@ -215,6 +230,7 @@ $(function(){
 
 function waterAidClick(){
 	$(".errorChk").text("");
+	$("#sucChk").text("");
 	
 	planFlag=0
 	primarySchoolFlag=0
@@ -236,6 +252,7 @@ $(document).ready(function(){
 	
 	$(".errorChk").text("");
 	$(".activities").text("");
+	$("#sucChk").text("");
 	
 	$("#primarySchDiv").hide();
 	$('#secSchDiv').hide();
@@ -243,8 +260,12 @@ $(document).ready(function(){
 	//$("#achCluster").hide();
 	$("#achHhID").hide();	
 	//$("#tbl_water_point").hide();	
-	$("#tbl_sanitation").hide();	
+	$("#tbl_sanitation").hide();
+	$("#trLatTypePast").hide();
+	$("#handWashFacilities").hide();
+		
 	$("#handwash_event").hide();
+	
 	$("#sharedLatHH").hide();	
 	
 	$("#tblHandSan").hide();		
@@ -254,27 +275,24 @@ $(document).ready(function(){
 	$("#achCluster").hide();	
 	$("#epiClusterCom").hide();
 	$("#odfStatus").hide();
-	
-	
-	
-	
+	$("#div_odf").hide();
+
 	
 //-------------------------------date format
 
-
-
-	
 });
 
 
 //----------------back button
 function backClick(){
 	$(".errorChk").text("");
+	$("#sucChk").text("");
 	}
 
 //---------------------report Type list	
 function achivementclick(){
 	$(".errorChk").text("");
+	$("#sucChk").text("");
 	
 	if(localStorage.plan_list==undefined || localStorage.plan_list==""){
 		$(".errorChk").text("Required Sync");
@@ -310,6 +328,11 @@ function achivementclick(){
 		$("#achClusterID").val("");
 		$("input:radio[name='hnd_event']" ).attr('checked','');
 		
+		$("input:radio[name='rec_hy_msg']" ).attr('checked','');
+		$("input:radio[name='location_hw_dev']" ).attr('checked','');
+		$("input:radio[name='available_hw_dev']" ).attr('checked','');
+		$("input:radio[name='available_soap']" ).attr('checked','');
+			
 		$("#achID").val("");
 		
 		$("#population").val("");
@@ -331,7 +354,8 @@ function achivementclick(){
 		$("#serRecpent").val("");	
 		$("#achPhoto").val("");
 		
-		$("#latType").val("");
+		$("#latType").val("");		
+		$("#latTypePast").val("");		
 		$("#san_conp_date").val("");	
 		$("#wp_tech").val("");
 		$("#wp_conp_date").val("");
@@ -344,6 +368,7 @@ function achivementclick(){
 		
 		$("#latTypeD").val("");
 		$("#san_or_hw_conp_date").val("");
+		
 		$("#schType").val("");
 		$("#schName").val("");
 		
@@ -357,10 +382,28 @@ function achivementclick(){
 		$("#sch_dapMale").val("");
 		$("#totalDisable").val("");
 		
+		$("#lat_rep").val("");
+		$("#lat_boys").val("");
+		$("#lat_girls").val("");
+		$("#lat_teacher").val("");
+		
+		$("#lat_total_population").val("");
+		
+		
+		$("#num_of_tap").val("");
+		
+		$("#num_0f_hh").val("");
+		$("#odf_adult").val("");
+		$("#odf_child").val("");
+		$("#odf_total").val("");
+		
 		$("#st_of_rehab_date").val("");
 		$("#schWash_conp_date").val("");
 		
 		$("#achWordNew").val("");
+		
+		$("#achOdfStatus").val("");
+		
 		
 		reviewAchDisplayFlag==false;
 		arrayId='';
@@ -393,21 +436,26 @@ function achDataNext(){
 		$(".activities").text(achPlanActivities);
 		
 		
-			
 		
 		if (achPlanSector=="HandWash"){
+			if (achPlanId=="2"){
+				$("#trLatTypePast").show();
+			}
 			
 			$("#trLatType").hide();
 			$("#tblHandSan").show();
-						
+			$("#handWashFacilities").show();						
 			$("#achWardOld").show();
 			$("#achCluster").show();
 			$("#epiClusterCom").show();
 			$("#achHhID").show();
 			$("#latType").val("");
 			$(".com_or_cluster_name").html("EPI Cluster/ Community Name<sup class='reqField'>*</sup>");
-			$(".hh_or_wp_id").html("Water Point ID<sup class='reqField'>*</sup>");
+			$(".hh_or_wp_id").html("Water Point ID(Same as Social Map)<sup class='reqField'>*</sup>");
 		}else if (achPlanSector=="Sanitation"){
+			if (achPlanId=="2"){
+				$("#trLatTypePast").show();
+				}
 			$("#tblHandSan").show();
 			$("#trLatType").show();
 			$("#achWardOld").show();
@@ -416,17 +464,28 @@ function achDataNext(){
 			$("#achHhID").show();
 			$("#tbl_sanitation").show();
 			$(".com_or_cluster_name").html("EPI Cluster/ Community Name<sup class='reqField'>*</sup>");
-			$(".hh_or_wp_id").html("HH ID<sup class='reqField'>*</sup>");			
+			$(".hh_or_wp_id").html("HHID(Same as Social Map)<sup class='reqField'>*</sup>");			
 		}else if(achPlanSector=="SchoolWash"){			
-			$("#divSchoolWash").show();					
+			if(achPlanId=="4"){
+				$("#divSchoolWash").show();
+				$("#tbl_school_lat").show();
+				$("#tbl_num_of_tap").hide();
+			}else if(achPlanId=="5"){
+				$("#tbl_school_lat").hide();
+				$("#divSchoolWash").show();
+				$("#tbl_num_of_tap").show();	
+			}						
+								
 		}else if(achPlanSector=="CommunityODF"){			
 			$("#achWardOld").show();
 			$("#achCluster").show();
 			$("#epiClusterCom").show();
 			$("#odfStatus").show();
 			$("#achWardNew").hide();
-			$(".com_or_cluster_name").html("Community Name (EPI Cluster Name)<sup class='reqField'>*</sup>");					
-			}
+			$("#div_odf").show();
+			$(".com_or_cluster_name").html("Community Name (EPI Cluster Name)<sup class='reqField'>*</sup>");
+			
+		}
 
 		
 		
@@ -449,7 +508,8 @@ function achDataNext(){
 //-----------------------------achivement data people support
 
 function achivementDataPSupport(){
-	$(".errorChk").text("");	
+	$(".errorChk").text("");
+	$("#sucChk").text("");	
 	
 	var now = new Date();
 	var month=now.getUTCMonth()+1;
@@ -499,20 +559,24 @@ function achivementDataPSupport(){
 	
 	//for sanitation 
 	var latType=$("#latType").val();
+	var latTypePast=$("#latTypePast").val();
 	
 	// for hand wash or latrine	
-	var sanHwCompDate=$("#san_or_hw_conp_date").val();	
-		
-		
+	var sanHwCompDate=$("#san_or_hw_conp_date").val();
 	
-
+	//hand wash
+	var recHyMsg=$("input[name='rec_hy_msg']:checked").val();
+	var locationHwDev=$("input[name='location_hw_dev']:checked").val();
+	var availableHwDev=$("input[name='available_hw_dev']:checked").val();
+	var availableSoap=$("input[name='available_soap']:checked").val();	
+		
 	
 	//------------- school info
 	var typeOfSchool=$("#schType").val();
 	nameOfpSchool=$("#p_school_combo").val();
 	nameOfsSchool=$("#s_school_combo").val();
 	
-	
+		
 	var schGirl=$("#sch_girl").val();
 	var schBoy=$("#sch_boy").val();
 	
@@ -527,10 +591,34 @@ function achivementDataPSupport(){
 	var schRehabInsDate=$("#st_of_rehab_date").val();
 	var schWashCompDate=$("#schWash_conp_date").val();
 	
+	//------------- school info others 
+	var numberOfLatRep=$("#lat_rep").val();
+	var numberOfLatBoy=$("#lat_boys").val();
+	var numberOfLatGirl=$("#lat_girls").val();
+	var numberOfLatTeacher=$("#lat_teacher").val();
+	
+	var numberOfTap=$("#num_of_tap").val();
+	
+		
+	
 	//------ ODF
 	
 	var odfStatus=$("#achOdfStatus").val();
-		
+	var odfHH=$("#num_0f_hh").val();
+	var odfAdult=$("#odf_adult").val();
+	var odfChild=$("#odf_child").val();
+	
+	if(odfHH==''){
+		odfHH=0;
+		}
+	if(odfAdult==''){
+		odfAdult=0;
+		}
+	
+	if(odfChild==''){
+		odfChild=0;
+		}
+	
 	
 	
 	
@@ -589,6 +677,10 @@ function achivementDataPSupport(){
 	if(teachFemale==''){
 		teachFemale=0;
 		}
+	if(teachMale==''){
+		teachMale=0;
+		}
+		
 	if(schDFemale==''){
 		schDFemale=0;
 		}
@@ -596,8 +688,26 @@ function achivementDataPSupport(){
 		population=0;
 		}
 
+	//---------- school
+	if(numberOfLatRep==''){
+		numberOfLatRep=0;
+		}
 	
+	if(numberOfLatBoy==''){
+		numberOfLatBoy=0;
+		}
 	
+	if(numberOfLatGirl==''){
+		numberOfLatGirl=0;
+		}
+	
+	if(numberOfLatTeacher==''){
+		numberOfLatTeacher=0;
+		}
+	
+	if(numberOfTap==''){
+		numberOfTap=0;
+		}
 	
 if (achPlanSector=="Sanitation" || achPlanSector=="HandWash"){
 	if (ach_word=="" ){		
@@ -648,7 +758,15 @@ if (achPlanSector=="Sanitation" || achPlanSector=="HandWash"){
 				achDapFemale=dapFemale
 																					
 				achLatType=latType
+				achLatTypePast=latTypePast
 				achComDate=sanHwCompDate
+				
+				achRecHyMsg=recHyMsg
+				achLocationHwDev=locationHwDev
+				achAvailableHwdev=availableHwDev
+				achAvailableSoap=availableSoap
+				
+				
 				
 				var ach_plan_id=$("input[name='activity_select']:checked").val();
 				//alert(ach_plan_id);						
@@ -699,6 +817,14 @@ if (achPlanSector=="Sanitation" || achPlanSector=="HandWash"){
 				achSchRehabInsDate=schRehabInsDate
 				achSchWashCompDate=schWashCompDate
 				
+				achLatRep=numberOfLatRep
+				achLatBoy=numberOfLatBoy
+				achLatGirl=numberOfLatGirl
+				achLatTeacher=numberOfLatTeacher
+				
+				achNumOfTap=numberOfTap
+				
+				
 				var ach_plan_id=$("input[name='activity_select']:checked").val();
 				//alert(ach_plan_id);						
 				$(".errorChk").text("");
@@ -727,14 +853,14 @@ if (achPlanSector=="Sanitation" || achPlanSector=="HandWash"){
 			achVillSubClusName=villSubClusName
 			achOdfStatus=odfStatus
 			
+			achHH=odfHH
+			achOdfAdult=odfAdult
+			achOdfChild=odfChild
+			
+			
 			var ach_plan_id=$("input[name='activity_select']:checked").val();
 			//alert(ach_plan_id);						
 			$(".errorChk").text("");
-			
-			$("#btn_take_pic").hide();
-			$("#myImageA").hide();
-			$("#btn_ach_lat_long").hide();
-			$("#btn_ach_save").hide();						
 			
 			var url="#inPhoto";
 			$.mobile.navigate(url);	
@@ -782,7 +908,7 @@ function totalPopulation(){
 			dapMale=0;
 			}
 			
-	var totalMF=eval(male)+eval(female)+eval(girls)+eval(boys)+eval(dapFemale)+eval(dapMale);
+	var totalMF=eval(male)+eval(female)+eval(girls)+eval(boys);//+eval(dapFemale)+eval(dapMale);
 	
 	$("#population").val(totalMF);
 	}
@@ -843,6 +969,47 @@ function totalDStudent(){
 	}
 
 
+
+function totalhwRehab(){
+	var lat_boys=$("#lat_boys").val();
+	var lat_girls=$("#lat_girls").val();	
+	var lat_teacher=$("#lat_teacher").val();
+	
+	if(lat_boys==''){
+			lat_boys=0;
+			}
+	if(lat_girls==''){
+			lat_girls=0;
+			}
+	if(lat_teacher==''){
+			lat_teacher=0;
+			}
+	
+			
+	var totalLatPopulation=eval(lat_boys)+eval(lat_girls)+eval(lat_teacher);
+	
+	$("#lat_total_population").val(totalLatPopulation);
+}
+
+
+
+function totalOdf(){
+	var odf_adult=$("#odf_adult").val();
+	var odf_child=$("#odf_child").val();	
+	
+	if(odf_adult==''){
+			odf_adult=0;
+			}
+	if(odf_child==''){
+			odf_child=0;
+			}
+	
+			
+	var totalOdf=eval(odf_adult)+eval(odf_child);
+	
+	$("#odf_total").val(totalOdf);
+	}
+
 		
 		
 		
@@ -858,8 +1025,6 @@ function getSchoolName(){
 		$('#secSchDiv').show();
 		
 	}
-	
-
 }
 //--------------/school wash
 
@@ -904,7 +1069,12 @@ function achiveDataSave(){
 				+'fdfd'+achGirls+'fdfd'+achBoys+'fdfd'+achDapMale+'fdfd'+achDapFemale+'fdfd'+achLatType+'fdfd'+achComDate
 				+'fdfd'+achTypeOfSchool+'fdfd'+nameOfpSchool+'fdfd'+nameOfsSchool+'fdfd'+achSchGirl+'fdfd'+achSchBoy+'fdfd'+achTeachFemale
 				+'fdfd'+achTeachMale+'fdfd'+achSchDFemale+'fdfd'+achSchDMale+'fdfd'+achSchRehabInsDate+'fdfd'+achSchWashCompDate
-				+'fdfd'+achOdfStatus+'fdfd'+achPlanActivities+'fdfd'+achPhoto+'fdfd'+startDt+'fdfd'+latitude+'fdfd'+longitude
+				+'fdfd'+achOdfStatus+'fdfd'+achPlanActivities+'fdfd'+achPhoto+'fdfd'+startDt+'fdfd'+latitude+'fdfd'+longitude+'fdfd'+achLatTypePast
+				+'fdfd'+achRecHyMsg+'fdfd'+achLocationHwDev+'fdfd'+achAvailableHwdev+'fdfd'+achAvailableSoap
+				+'fdfd'+achLatRep+'fdfd'+achLatBoy+'fdfd'+achLatGirl+'fdfd'+achLatTeacher+'fdfd'+achNumOfTap
+				+'fdfd'+achHH+'fdfd'+achOdfAdult+'fdfd'+achOdfChild
+				
+				
 				
 				if (achPlanId==''){
 					$(".errorChk").text("New records not available");
@@ -989,6 +1159,7 @@ function achiveDataSave(){
 						achServiceRecpt='';
 						//--------------------------
 						achLatType='';
+						achLatTypePast=''
 						achComDate='';
 						
 						achWpTech='';
@@ -1010,6 +1181,11 @@ function achiveDataSave(){
 						achSchRehabInsDate='';
 						achSchWashCompDate='';
 						
+						achLatRep='';
+						achLatBoy='';
+						achLatGirl='';
+						achLatTeacher='';
+						
 						
 						//-----------------------
 						achPhoto='';
@@ -1021,7 +1197,13 @@ function achiveDataSave(){
 						$("#achWord").val();
 						$("#achClusterID").val("");
 						$("#achID").val(""); //hhid
-						$("input:radio[name='hnd_event']" ).attr('checked','');
+						$("input:radio[name='hnd_event']").attr('checked','');
+						
+						$("input:radio[name='rec_hy_msg']").attr('checked','');
+						$("input:radio[name='location_hw_dev']").attr('checked','');
+						$("input:radio[name='available_hw_dev']").attr('checked','');
+						$("input:radio[name='available_soap']").attr('checked','');
+		
 						$("#population").val("");
 						$("#household").val("");
 						$("#male").val("");
@@ -1041,7 +1223,25 @@ function achiveDataSave(){
 						
 						//sanitation
 						$("#latType").val("");
+						$("#latTypePast").val("");
 						$("#san_conp_date").val("");
+						
+						//school
+						$("#lat_rep").val("");
+						$("#lat_boys").val("");
+						$("#lat_girls").val("");
+						$("#lat_teacher").val("");
+						
+						$("#lat_total_population").val("");
+						
+						$("#num_of_tap").val("");
+						
+						// odf
+						$("#achOdfStatus").val("");
+						$("#num_0f_hh").val("");
+						$("#odf_adult").val("");
+						$("#odf_child").val("");
+						$("#odf_total").val("");
 						
 						//water point
 						$("#wp_tech").val("");
@@ -1188,7 +1388,23 @@ function reviewAchiveData(){
 			$("#serRecpent").val("");
 			
 			$("#latType").val("");
+			$("#latTypePast").val("");
 			$("#san_conp_date").val("");
+			
+			$("#lat_rep").val("");
+			$("#lat_boys").val("");
+			$("#lat_girls").val("");
+			$("#lat_teacher").val("");
+			
+			$("#lat_total_population").val("");
+			
+			$("#num_of_tap").val("");
+			
+			$("#achOdfStatus").val("");
+			$("#num_0f_hh").val("");
+			$("#odf_adult").val("");
+			$("#odf_child").val("");
+			$("#odf_total").val("");
 			
 			$("#wp_tech").val("");
 			$("#wp_conp_date").val("");
@@ -1265,18 +1481,19 @@ function reviewDataNext(){
 		$("#latType").val(achRevDetailsArray[15]);
 		$("#san_or_hw_conp_date").val(achRevDetailsArray[16]);
 		$("#schType").val(achRevDetailsArray[17]);
+		
 		$("#p_school_combo").val(achRevDetailsArray[18]);
 		$("#s_school_combo").val(achRevDetailsArray[19]);
 		
 		$("#sch_girl").val(achRevDetailsArray[20]);
 		$("#sch_boy").val(achRevDetailsArray[21]);
-		//$("#totalStudent").val("");
+		$("#totalStudent").val(eval(achRevDetailsArray[20])+eval(achRevDetailsArray[21]));
 		$("#teach_female").val(achRevDetailsArray[22]);
 		$("#teach_male").val(achRevDetailsArray[23]);
-		//$("#totalTeacher").val("");
+		$("#totalTeacher").val(eval(achRevDetailsArray[22])+eval(achRevDetailsArray[23]));
 		$("#sch_dapFemale").val(achRevDetailsArray[24]);
 		$("#sch_dapMale").val(achRevDetailsArray[25]);
-		//$("#totalDisable").val("");
+		$("#totalDisable").val(eval(achRevDetailsArray[24])+eval(achRevDetailsArray[25]));
 		
 		$("#st_of_rehab_date").val(achRevDetailsArray[26]);
 		$("#schWash_conp_date").val(achRevDetailsArray[27]);
@@ -1292,6 +1509,29 @@ function reviewDataNext(){
 		var image = document.getElementById('myImageA');
 		image.src = achRevDetailsArray[30];
 		imagePathA = achRevDetailsArray[30];
+		
+		$("#latTypePast").val(achRevDetailsArray[34]);
+		
+		$("input:radio[name='rec_hy_msg'][value='"+achRevDetailsArray[35]+"']").attr('checked','checked');
+		$("input:radio[name='location_hw_dev'][value='"+achRevDetailsArray[36]+"']").attr('checked','checked');
+		$("input:radio[name='available_hw_dev'][value='"+achRevDetailsArray[37]+"']").attr('checked','checked');
+		$("input:radio[name='available_soap'][value='"+achRevDetailsArray[38]+"']").attr('checked','checked');
+		
+		$("#lat_rep").val(achRevDetailsArray[39]);
+		$("#lat_boys").val(achRevDetailsArray[40]);
+		$("#lat_girls").val(achRevDetailsArray[41]);
+		$("#lat_teacher").val(achRevDetailsArray[42]);
+		$("#lat_total_population").val(eval(achRevDetailsArray[40])+eval(achRevDetailsArray[41])+eval(achRevDetailsArray[42]));
+		
+		$("#num_of_tap").val(achRevDetailsArray[43]);
+		
+		$("#num_0f_hh").val(achRevDetailsArray[44]);
+		$("#odf_adult").val(achRevDetailsArray[45]);
+		$("#odf_child").val(achRevDetailsArray[46]);
+		
+		$("#odf_total").val(eval(achRevDetailsArray[45])+eval(achRevDetailsArray[46]));
+		
+		
 	
 		
 	
@@ -1316,9 +1556,9 @@ function achiveDataSubmit(){
 		
 		achPhoto=$("#achPhoto").val();
 
-		if(achPlanSector=="CommunityODF"){
+		/*if(achPlanSector=="CommunityODF"){
 			syncDataAch();
-		}else{
+		}else{*/
 			if (latitude==undefined || latitude==''){
 				latitude=0;
 				}
@@ -1348,15 +1588,18 @@ function achiveDataSubmit(){
 					}
 				}//end check location
 			}//chk photo
-		}
+		/*}*/
 	}
+	
+	
 
 function syncDataAch(){	
 			
-			//alert(apipath+'submitAchiveData?cid=PLANBD&mobile_no='+localStorage.mobile_no+'&syncCode='+localStorage.sync_code+'&ach_plan_id='+achPlanId+'&achWord='+achWord+'&achCluster='+achCluster+'&achWardNew='+achWardNew+'&achEpiComName='+encodeURIComponent(achEpiComName)+'&achVillSubClusName='+encodeURIComponent(achVillSubClusName)+'&achHhhName='+encodeURIComponent(achHhhName)+'&achID='+achID+'&achPopulation='+achPopulation+'&achMale='+achMale+'&achFemale='+achFemale+'&achGirls='+achGirls+'&achBoys='+achBoys+'&achDapMale='+achDapMale+'&achDapFemale='+achDapFemale+'&achLatType='+encodeURIComponent(achLatType)+'&achComDate='+achComDate+"&achTypeOfSchool="+achTypeOfSchool+"&achNameOfSchool="+encodeURIComponent(achNameOfSchool)+"&achSchGirl="+achSchGirl+"&achSchBoy="+achSchBoy+"&achTeachFemale="+achTeachFemale+"&achTeachMale="+achTeachMale+"&achSchDFemale="+achSchDFemale+"&achSchDMale="+achSchDMale+"&achSchRehabInsDate="+achSchRehabInsDate+"&achSchWashCompDate="+achSchWashCompDate+'&achOdfStatus='+achOdfStatus+'&latitude='+latitude+'&longitude='+longitude+'&ach_photo='+imageName+'&ach_startDt='+startDt);
+			//alert(apipath+'submitAchiveData?cid=PLANBD&mobile_no='+localStorage.mobile_no+'&syncCode='+localStorage.sync_code+'&ach_plan_id='+achPlanId+'&achWord='+achWord+'&achCluster='+achCluster+'&achWardNew='+achWardNew+'&achEpiComName='+encodeURIComponent(achEpiComName)+'&achVillSubClusName='+encodeURIComponent(achVillSubClusName)+'&achHhhName='+encodeURIComponent(achHhhName)+'&achID='+achID+'&achPopulation='+achPopulation+'&achMale='+achMale+'&achFemale='+achFemale+'&achGirls='+achGirls+'&achBoys='+achBoys+'&achDapMale='+achDapMale+'&achDapFemale='+achDapFemale+'&achLatType='+encodeURIComponent(achLatType)+'&achLatTypePast='+encodeURIComponent(achLatTypePast)+'&achComDate='+achComDate+"&achTypeOfSchool="+achTypeOfSchool+"&achNameOfSchool="+encodeURIComponent(achNameOfSchool)+"&achSchGirl="+achSchGirl+"&achSchBoy="+achSchBoy+"&achTeachFemale="+achTeachFemale+"&achTeachMale="+achTeachMale+"&achSchDFemale="+achSchDFemale+"&achSchDMale="+achSchDMale+"&achSchRehabInsDate="+achSchRehabInsDate+"&achSchWashCompDate="+achSchWashCompDate+'&achOdfStatus='+achOdfStatus+'&achHH='+achHH+'&achOdfAdult='+achOdfAdult+'&achOdfChild='+achOdfChild+'&achLatRep='+achLatRep+'&achLatBoy='+achLatBoy+'&achLatGirl='+achLatGirl+'&achLatTeacher='+achLatTeacher+'&achNumOfTap='+achNumOfTap+'&achRecHyMsg='+achRecHyMsg+'&achLocationHwDev='+achLocationHwDev+'&achAvailableHwdev='+achAvailableHwdev+'&achAvailableSoap='+achAvailableSoap+'&latitude='+latitude+'&longitude='+longitude+'&ach_photo='+imageName+'&ach_startDt='+startDt);
+			
 			$.ajax({
 					type: 'POST',
-					url:apipath+'submitAchiveData?cid=PLANBD&mobile_no='+localStorage.mobile_no+'&syncCode='+localStorage.sync_code+'&ach_plan_id='+achPlanId+'&achWord='+achWord+'&achCluster='+achCluster+'&achWardNew='+achWardNew+'&achEpiComName='+encodeURIComponent(achEpiComName)+'&achVillSubClusName='+encodeURIComponent(achVillSubClusName)+'&achHhhName='+encodeURIComponent(achHhhName)+'&achID='+achID+'&achPopulation='+achPopulation+'&achMale='+achMale+'&achFemale='+achFemale+'&achGirls='+achGirls+'&achBoys='+achBoys+'&achDapMale='+achDapMale+'&achDapFemale='+achDapFemale+'&achLatType='+encodeURIComponent(achLatType)+'&achComDate='+achComDate+"&achTypeOfSchool="+achTypeOfSchool+"&achNameOfSchool="+encodeURIComponent(achNameOfSchool)+"&achSchGirl="+achSchGirl+"&achSchBoy="+achSchBoy+"&achTeachFemale="+achTeachFemale+"&achTeachMale="+achTeachMale+"&achSchDFemale="+achSchDFemale+"&achSchDMale="+achSchDMale+"&achSchRehabInsDate="+achSchRehabInsDate+"&achSchWashCompDate="+achSchWashCompDate+'&achOdfStatus='+achOdfStatus+'&latitude='+latitude+'&longitude='+longitude+'&ach_photo='+imageName+'&ach_startDt='+startDt,
+					url:apipath+'submitAchiveData?cid=PLANBD&mobile_no='+localStorage.mobile_no+'&syncCode='+localStorage.sync_code+'&ach_plan_id='+achPlanId+'&achWord='+achWord+'&achCluster='+achCluster+'&achWardNew='+achWardNew+'&achEpiComName='+encodeURIComponent(achEpiComName)+'&achVillSubClusName='+encodeURIComponent(achVillSubClusName)+'&achHhhName='+encodeURIComponent(achHhhName)+'&achID='+achID+'&achPopulation='+achPopulation+'&achMale='+achMale+'&achFemale='+achFemale+'&achGirls='+achGirls+'&achBoys='+achBoys+'&achDapMale='+achDapMale+'&achDapFemale='+achDapFemale+'&achLatType='+encodeURIComponent(achLatType)+'&achLatTypePast='+encodeURIComponent(achLatTypePast)+'&achComDate='+achComDate+"&achTypeOfSchool="+achTypeOfSchool+"&achNameOfSchool="+encodeURIComponent(achNameOfSchool)+"&achSchGirl="+achSchGirl+"&achSchBoy="+achSchBoy+"&achTeachFemale="+achTeachFemale+"&achTeachMale="+achTeachMale+"&achSchDFemale="+achSchDFemale+"&achSchDMale="+achSchDMale+"&achSchRehabInsDate="+achSchRehabInsDate+"&achSchWashCompDate="+achSchWashCompDate+'&achOdfStatus='+achOdfStatus+'&achHH='+achHH+'&achOdfAdult='+achOdfAdult+'&achOdfChild='+achOdfChild+'&achLatRep='+achLatRep+'&achLatBoy='+achLatBoy+'&achLatGirl='+achLatGirl+'&achLatTeacher='+achLatTeacher+'&achNumOfTap='+achNumOfTap+'&achRecHyMsg='+achRecHyMsg+'&achLocationHwDev='+achLocationHwDev+'&achAvailableHwdev='+achAvailableHwdev+'&achAvailableSoap='+achAvailableSoap+'&latitude='+latitude+'&longitude='+longitude+'&ach_photo='+imageName+'&ach_startDt='+startDt,
 					   
 					   success: function(result) {
 							//alert(result);
@@ -1394,7 +1637,8 @@ function syncDataAch(){
 							
 							achPlanId="";
 							achCBOid="";
-							$(".errorChk").text('Successfully Submitted');
+							$("#sucChk").text('Successfully Submitted');
+							$(".errorChk").text("");
 							$("#btn_ach_save").hide();
 							$("#btn_take_pic").hide();
 							$("#btn_ach_lat_long").hide();
@@ -1406,11 +1650,11 @@ function syncDataAch(){
 							$("#btn_ach_submit").show();
 						}else if(result=='Failed4'){
 							//$(".errorChk").text('Failed to Submit');
-							$(".errorChk").text('Invalid Cluster');										
+							$(".errorChk").text('Already Declared');										
 							$("#btn_ach_submit").show();
 						}else if(result=='Failed5'){
 							//$(".errorChk").text('Failed to Submit');
-							$(".errorChk").text('Event Already Exists');															
+							$(".errorChk").text('Already Certified');															
 							$("#btn_ach_submit").show();
 						}else if(result=='Failed6'){
 							//$(".errorChk").text('Failed to Submit');
@@ -1434,6 +1678,7 @@ function syncDataAch(){
 // ------------------------------------- Report data
 
 function ffReport(){
+	//alert(apipath+'get_ff_rpt_activity?cid=PLANBD&mobile='+localStorage.mobile_no+'&sync_code='+localStorage.sync_code);
 	//$(".errorChk").text(apipath+'get_ff_rpt_activity?cid=PLANBD&mobile='+localStorage.mobile_no+'&sync_code='+localStorage.sync_code);
 	$.ajax({
 			url:apipath+'get_ff_rpt_activity?cid=PLANBD&mobile='+localStorage.mobile_no+'&sync_code='+localStorage.sync_code,

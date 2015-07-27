@@ -333,14 +333,14 @@
 			<li class="ui-field-contain">
 				<select name="achClusterID" id="achClusterID" data-native-menu="false">
 						<option value="">EPI Cluster</option>
-						<option value="01">01</option>
-						<option value="02">02</option>
-						<option value="03">03</option>
-						<option value="04">04</option>
-						<option value="05">05</option>
-						<option value="06">06</option>
-						<option value="07">07</option>
-						<option value="08">08</option>															 												
+						<option value="Ka-1">Ka-1</option>
+						<option value="Ka-2">Ka-2</option>
+						<option value="Kha-1">Kha-1</option>
+						<option value="Kha-2">Kha-2</option>
+						<option value="Ga-1">Ga-1</option>
+						<option value="Ga-2">Ga-2</option>
+						<option value="Gha-1">Gha-1</option>
+						<option value="Gha-2">Gha-2</option>															 												
 				  </select>	
             </li>
         </ul>
@@ -393,7 +393,7 @@
             </li>
             <li class="ui-field-contain hh_or_wp_id" style="background-color:#F2F2F2; font-weight:bold;"></li>
 			<li class="ui-field-contain">
-                <input name="achID" id="achID" placeholder="" value="" type="number" maxlength="3" >
+                <input name="achID" id="achID" placeholder="" value="" type="number" maxlength="20" >
             </li>
         </ul>
 		 
@@ -442,13 +442,83 @@
                         <td width="5" align="left"></td>
                     </tr>                   
 			</table>
+            <div id="handWashFacilities">
+            	<br/>
+                <ul data-role="listview" data-inset="true" >
+                    <li style="background-color:#F2F2F2; font-weight:bold;">Status of Hand washing at HH</li>
+                    <li style="background-color:#F2F2F2;">Received Hygiene Message</li>
+                    <li class="ui-field-contain">
+                        <fieldset data-role="controlgroup" data-type="horizontal">
+                            <input type="radio" name="rec_hy_msg" id="rec_hy_msg_y" value="YES">
+                            <label for="rec_hy_msg_y">YES</label>
+                            <input type="radio" name="rec_hy_msg" id="rec_hy_msg_n" value="NO">
+                            <label for="rec_hy_msg_n">NO</label>
+                        </fieldset>
+                    </li>
+               
+                    <li style="background-color:#F2F2F2;">Location of Hand washing device (within 5 meters)</li>
+                    <li class="ui-field-contain">
+                        <fieldset data-role="controlgroup" data-type="horizontal">
+                            <input type="radio" name="location_hw_dev" id="location_hw_dev_y" value="YES">
+                            <label for="location_hw_dev_y">YES</label>
+                            <input type="radio" name="location_hw_dev" id="location_hw_dev_n" value="NO">
+                            <label for="location_hw_dev_n">NO</label>                       
+                        </fieldset>
+                    </li>
+                
+                    <li style="background-color:#F2F2F2;">Availability of water into HW Device</li>
+                    <li class="ui-field-contain">
+                        <fieldset data-role="controlgroup" data-type="horizontal">
+                            <input type="radio" name="available_hw_dev" id="available_hw_dev_y" value="YES">
+                            <label for="available_hw_dev_y">YES</label>
+                            <input type="radio" name="available_hw_dev" id="available_hw_dev_n" value="NO">
+                            <label for="available_hw_dev_n">NO</label>
+                        </fieldset>
+                    </li>
+                     <li style="background-color:#F2F2F2;">Availability of soap</li>
+                    <li class="ui-field-contain">
+                        <fieldset data-role="controlgroup" data-type="horizontal">
+                            <input type="radio" name="available_soap" id="available_soap_y" value="YES">
+                            <label for="available_soap_y">YES</label>
+                            <input type="radio" name="available_soap" id="available_soap_n" value="NO">
+                            <label for="available_soap_n">NO</label>
+                        </fieldset>
+                    </li>
+                </ul>
+          </div>      
             <br/>			
 			<table class="ui-body-d ui-shadow table-stripe ui-responsive" id="tblFacilityCount"  data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
 				   
 				  <tr id="trLatType">
-                        <td width="100%" style="vertical-align:middle;" colspan="2" > Type of Latrine<sup class="reqField">*</sup>
+                        <td width="100%" style="vertical-align:middle;" colspan="2" > Type of Latrine(Present)<sup class="reqField">*</sup>
 							<select name="latType" id="latType" data-native-menu="false" >
 								 <option value="">Latrine Type</option>
+                                 <optgroup label="Improved Latrine">
+                                     <option value="Improved-Piped sewer system">Piped sewer system</option>						
+                                     <option value="Improved-Septic tank">Septic tank</option>
+                                     <option value="Improved-Flush to pit latrine" >Flush to pit latrine</option>
+                                     <option value="Improved-Pit latrine with slab & water seal" >Pit latrine with slab & water seal</option>
+                                     <option value="Improved-Pit latrine with slab & no water seal but with a lid" >Pit latrine with slab & no water seal but with a lid</option>
+                                     <option value="Improved-Pit latrine with slab & flap,no water seal" >Pit latrine with slab & flap,no water seal</option>
+                                     <option value="Improved-Ventilated Improved Pit (VIP) latrine" >Ventilated Improved Pit (VIP) latrine</option>
+                                     <option value="Improved-Composting toilet ensure separation of urine, water and excreta" >Composting toilet ensure separation of urine, water and excreta</option>
+                                     
+                                 </optgroup>
+                                 <optgroup label="Unimproved sanitation facilities">
+                                     <option value="Unimproved-Flush or pour flush toilet connected to somewhere else (canal, ditch, river, etc.....)">Flush or pour flush toilet connected to somewhere else (canal, ditch, river, etc.....)</option>						
+                                     <option value="Unimproved-Pit latrine without slab/open pit">Pit latrine without slab/open pit</option>
+                                     <option value="Unimproved-Pit latrine with slab & no water seal/broken water seal and no lid" >Pit latrine with slab & no water seal/broken water seal and no lid</option>
+                                     <option value="Unimproved-Hanging toilet/latrine">Hanging toilet/latrine</option>
+                                     <option value="Unimproved-Bucket latrine" >Bucket latrine</option>
+                                 </optgroup>
+                                 
+							</select>							
+						</td>                        
+                    </tr>
+                    <tr id="trLatTypePast">
+                        <td width="100%" style="vertical-align:middle;" colspan="2" > Type of Latrine(Past)<sup class="reqField">*</sup>
+							<select name="latTypePast" id="latTypePast" data-native-menu="false" >
+								 <option value="">Latrine Type(Past)</option>
                                  <optgroup label="Improved Latrine">
                                      <option value="Improved-Piped sewer system">Piped sewer system</option>						
                                      <option value="Improved-Septic tank">Septic tank</option>
@@ -478,6 +548,8 @@
                     </tr>						
                     
          </table>
+         
+         
           </div>  
            
             <div id="divSchoolWash">
@@ -565,10 +637,51 @@
                         <td width="5" align="left"></td>
                     </tr>                   
 			</table>
+            <br/>
+             <table id="tbl_school_lat" class="ui-body-d ui-shadow table-stripe ui-responsive" data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
+                  
+					<tr>
+                        <td width="70%" style="vertical-align:middle;">Number of latrine Repaired</td>
+                        <td width="30%"><input name="lat_rep" id="lat_rep" placeholder="" value="" min="0" type="number"></td>
+                        <td width="5" align="left">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td width="70%" style="vertical-align:middle;">boys</td>
+                        <td width="30%"><input name="lat_boys" id="lat_boys" placeholder="" value="" min="0" onBlur="totalhwRehab();" type="number"></td>
+                        <td width="5" align="left">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td width="70%" style="vertical-align:middle;">Girls</td>
+                        <td width="30%"><input name="lat_girls" id="lat_girls" placeholder="" value="" min="0" onBlur="totalhwRehab();" type="number"></td>
+                        <td width="5" align="left">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td width="70%" style="vertical-align:middle;">Teachers</td>
+                        <td width="30%"><input name="lat_teacher" id="lat_teacher" placeholder="" value="" min="0" onBlur="totalhwRehab();" type="number"></td>
+                        <td width="5" align="left">&nbsp;</td>
+                    </tr>
+                    <tr >
+                        <td width="70%" style="vertical-align:middle;">Total<sup class="reqField">*</sup></td>
+                        <td width="30%"><input name="lat_total_population" id="lat_total_population"  placeholder="" value="" type="number" readonly="readonly" style="background-color:#EEEEEE;"></td>
+                        <td width="5" align="left"></td>
+                    </tr>                   
+			</table>
+             <table id="tbl_num_of_tap" class="ui-body-d ui-shadow table-stripe ui-responsive" data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
+                  
+					<tr>
+                        <td width="70%" style="vertical-align:middle;">Number of Tap</td>
+                        <td width="30%"><input name="num_of_tap" id="num_of_tap" placeholder="" value="" min="0" type="number"></td>
+                        <td width="5" align="left">&nbsp;</td>
+                    </tr>
+             </table>
             <br/>	
 			<table class="ui-body-d ui-shadow table-stripe ui-responsive"  data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
-				  	<tr >
-                        <td width="100%" style="vertical-align:middle;" colspan="2">Starting date of rehabilitation/installation<sup class="reqField">*</sup>							
+				  	
+                    <tr >
+                        <td colspan="2" ><strong>Installation of hand washing device</strong></td>
+                  	</tr>
+                    <tr >
+                        <td width="100%" style="vertical-align:middle;" colspan="2">Starting date<sup class="reqField">*</sup>							
 							<input type="date" name="st_of_rehab_date" id="st_of_rehab_date" data-role="date">
 						</td>                        
                     </tr>                  
@@ -579,7 +692,33 @@
                     </tr>						
                     
          	</table>
-            </div>  
+            </div>
+            <div id="div_odf">
+             <table class="ui-body-d ui-shadow table-stripe ui-responsive" data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
+               
+               <tr>
+                    <td width="70%" style="vertical-align:middle;">Number of HH</td>
+                    <td width="30%"><input name="num_0f_hh" id="num_0f_hh" placeholder="" value="" min="0" onBlur="totalOdf();" type="number"></td>
+                    <td width="5" align="left">&nbsp;</td>
+                </tr>
+                
+                <tr>
+                    <td width="70%" style="vertical-align:middle;">Adult</td>
+                    <td width="30%"><input name="odf_adult" id="odf_adult" placeholder="" value="" onBlur="totalOdf();" min="0" type="number"></td>
+                    <td width="5" align="left">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="70%" style="vertical-align:middle;">Children</td>
+                    <td width="30%"><input name="odf_child" id="odf_child" placeholder="" value="" min="0" onBlur="totalOdf();" type="number"></td>
+                    <td width="5" align="left">&nbsp;</td>
+                </tr>
+                 <tr >
+                    <td width="70%" style="vertical-align:middle;">Total<sup class="reqField">*</sup></td>
+                    <td width="30%"><input name="odf_total" id="odf_total"  placeholder="" value="" type="number" readonly="readonly" style="background-color:#EEEEEE;"></td>
+                    <td width="5" align="left"></td>
+                </tr> 
+            </table> 
+           </div>             
             
          <a data-role="button" href="#" onClick="achivementDataPSupport();"  data-transition="slide" >Next</a>
         
@@ -636,7 +775,8 @@
         <input name="ach_lat" id="ach_lat" value=""   type="hidden">
         <input name="ach_long" id="ach_long" value=""  type="hidden">
         <a data-role="button" id="btn_ach_lat_long" onClick="getLocationInfoAch();" class="ui-btn" >Confirm Location</a>
-		<div class="errorChk" style="color:#00CA00;"></div>
+		<div class="errorChk" style="color:#F00;"></div>
+        <div id="sucChk" style="color:#00CA00;"></div>
         <!--<div id="checkLocationAch" style="color:#FF0000;"></div>-->
         <br/><br/>
         <a data-role="button" id="btn_ach_save" onClick="achiveDataSave();" class="ui-btn" >Save</a>
