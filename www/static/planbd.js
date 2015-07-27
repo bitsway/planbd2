@@ -279,13 +279,35 @@ $(document).ready(function(){
 	$("#div_odf").hide();
 	
 	
+	$(".activities").text(localStorage.achPlanActivities);
 	
-	if($("#schType").val()=="Primary"){			
-		$('#primarySchDiv').show();
-	}else{
-		$('#secSchDiv').show();
+	
+	if (planFlag==0){
+			$("#planlistDiv").html(localStorage.plan_list);
+			planFlag=1;
+		}else{
+			$('#planlistDiv').empty();
+			$('#planlistDiv').append(localStorage.plan_list).trigger('create');
 		}
 		
+		
+		if (primarySchoolFlag==0){
+			$("#primarySchDiv").html(localStorage.primary_school);	
+			primarySchoolFlag=1;
+		}else{
+			$('#primarySchDiv').empty();
+			$('#primarySchDiv').append(localStorage.primary_school).trigger('create');
+		}
+		
+		if (secondarySchFlag==0){			   
+			$("#secSchDiv").html(localStorage.secondary_school);	
+			secondarySchFlag=1;
+		}else{
+			$('#secSchDiv').empty();
+			$('#secSchDiv').append(localStorage.secondary_school).trigger('create');
+		}
+	
+			
 		
 	if (localStorage.achPlanSector=="HandWash"){
 		if (localStorage.achPlanId=="2"){
@@ -356,6 +378,8 @@ function backClick(){
 function achivementclick(){
 	$(".errorChk").text("");
 	$("#sucChk").text("");
+	
+	$(".activities").text(localStorage.achPlanActivities);
 	
 	if(localStorage.plan_list==undefined || localStorage.plan_list==""){
 		$(".errorChk").text("Required Sync");
@@ -781,7 +805,7 @@ function achivementDataPSupport(){
 		numberOfTap=0;
 		}
 	
-if (achPlanSector=="Sanitation" || achPlanSector=="HandWash"){
+if (localStorage.achPlanSector=="Sanitation" || localStorage.achPlanSector=="HandWash"){
 	if (ach_word=="" ){		
 		$(".errorChk").text("Required Ward (Old) ");
 	}else if(ach_cluster=="") {
@@ -852,7 +876,7 @@ if (achPlanSector=="Sanitation" || achPlanSector=="HandWash"){
 		}
 	}
 	
-	}else if(achPlanSector=="SchoolWash"){
+	}else if(localStorage.achPlanSector=="SchoolWash"){
 		if (typeOfSchool=="" ){
 			$(".errorChk").text("Required School Type ");						
 		}else if (typeOfSchool=="Primary" && nameOfpSchool=="" ){
@@ -909,7 +933,7 @@ if (achPlanSector=="Sanitation" || achPlanSector=="HandWash"){
 		}
 			
 					
-	}else if(achPlanSector=="CommunityODF"){
+	}else if(localStorage.achPlanSector=="CommunityODF"){
 		if (ach_word=="" ){		
 			$(".errorChk").text("Required Ward (Old) ");
 		}else if(ach_cluster=="") {
@@ -1086,7 +1110,7 @@ function totalOdf(){
 		
 		
 		
-function getSchoolName(){
+function getSchoolName(){	
 	var schoolType=$("#schType").val();
 	
 	if (schoolType=="Primary"){
@@ -1148,7 +1172,7 @@ function achiveDataSave(){
 				
 				
 				
-				if (achPlanId==''){
+				if (localStorage.achPlanId==''){
 					$(".errorChk").text("New records not available");
 					$("#btn_ach_save").show();
 				}else{
@@ -1328,7 +1352,8 @@ function achiveDataSave(){
 						arrayId=-1;
 						
 						
-						$(".errorChk").text("Successfully saved for review");
+						$(".errorChk").text("");
+						$("#sucChk").text("Successfully saved for review");
 						$("#btn_take_pic").hide();
 						$("#btn_ach_lat_long").hide();
 						
@@ -1646,7 +1671,7 @@ function achiveDataSubmit(){
 					$(".errorChk").text("Please confirm your location ");
 					$("#btn_ach_submit").show();
 				}else{				
-					if (achPlanId==''){
+					if (localStorage.achPlanId==''){
 						$(".errorChk").text("New records not available");
 						$("#btn_ach_submit").show();
 					}else{
