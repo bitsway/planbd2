@@ -254,6 +254,7 @@ $(document).ready(function(){
 	$(".activities").text("");
 	$("#sucChk").text("");
 	
+	
 	$("#primarySchDiv").hide();
 	$('#secSchDiv').hide();
 	
@@ -276,6 +277,67 @@ $(document).ready(function(){
 	$("#epiClusterCom").hide();
 	$("#odfStatus").hide();
 	$("#div_odf").hide();
+	
+	
+	
+	if($("#schType").val()=="Primary"){			
+		$('#primarySchDiv').show();
+	}else{
+		$('#secSchDiv').show();
+		}
+		
+		
+	if (localStorage.achPlanSector=="HandWash"){
+		if (localStorage.achPlanId=="2"){
+			$("#trLatTypePast").show();
+		}
+		
+		$("#trLatType").hide();
+		$("#tblHandSan").show();
+		$("#handWashFacilities").show();						
+		$("#achWardOld").show();
+		$("#achCluster").show();
+		$("#epiClusterCom").show();
+		$("#achHhID").show();
+		$("#latType").val("");
+		$(".com_or_cluster_name").html("EPI Cluster/ Community Name<sup class='reqField'>*</sup>");
+		$(".hh_or_wp_id").html("Water Point ID(Same as Social Map)<sup class='reqField'>*</sup>");
+	}else if (localStorage.achPlanSector=="Sanitation"){
+		if (localStorage.achPlanId=="2"){
+			$("#trLatTypePast").show();
+			}
+		$("#tblHandSan").show();
+		$("#trLatType").show();
+		$("#achWardOld").show();
+		$("#achCluster").show();
+		$("#epiClusterCom").show();
+		$("#achHhID").show();
+		$("#tbl_sanitation").show();
+		$(".com_or_cluster_name").html("EPI Cluster/ Community Name<sup class='reqField'>*</sup>");
+		$(".hh_or_wp_id").html("HHID(Same as Social Map)<sup class='reqField'>*</sup>");			
+	}else if(localStorage.achPlanSector=="SchoolWash"){			
+		if(localStorage.achPlanId=="4"){
+			$("#divSchoolWash").show();
+			$("#tbl_school_lat").show();
+			$("#tbl_num_of_tap").hide();
+		}else if(localStorage.achPlanId=="5"){
+			$("#tbl_school_lat").hide();
+			$("#divSchoolWash").show();
+			$("#tbl_num_of_tap").show();	
+		}						
+							
+	}else if(localStorage.achPlanSector=="CommunityODF"){			
+		$("#achWardOld").show();
+		$("#achCluster").show();
+		$("#epiClusterCom").show();
+		$("#odfStatus").show();
+		$("#achWardNew").hide();
+		$("#div_odf").show();
+		$(".com_or_cluster_name").html("Community Name (EPI Cluster Name)<sup class='reqField'>*</sup>");
+		
+	}
+	
+	
 
 	
 //-------------------------------date format
@@ -287,6 +349,7 @@ $(document).ready(function(){
 function backClick(){
 	$(".errorChk").text("");
 	$("#sucChk").text("");
+	
 	}
 
 //---------------------report Type list	
@@ -418,27 +481,34 @@ function achivementclick(){
 }
 	
 //------------------------------domain list 
-function achDataNext(){	
-		
+function achDataNext(){		
+	
 	if($("#planlistDiv").find("input[name='activity_select']:checked").length==0){
 		$(".errorChk").text("Required Plan");
 	}else{
 		var ach_plan_id=$("input[name='activity_select']:checked").val();
+		
 		
 		achPlanActivities=$("#achActivityName"+ach_plan_id).val();
 		
 		 achPlanSector=$("#achActivitySector"+ach_plan_id).val();
 		
 		
-		achPlanId=ach_plan_id;
-		achPlanActivities=achPlanActivities;
+		localStorage.achPlanId=ach_plan_id;
+		localStorage.achPlanActivities=achPlanActivities;
+		localStorage.achPlanSector=achPlanSector;
 		
-		$(".activities").text(achPlanActivities);
+		$(".activities").text(localStorage.achPlanActivities);
+		
+		if($("#schType").val()=="Primary"){			
+			$('#primarySchDiv').show();
+		}else{
+			$('#secSchDiv').show();
+			}
 		
 		
-		
-		if (achPlanSector=="HandWash"){
-			if (achPlanId=="2"){
+		if (localStorage.achPlanSector=="HandWash"){
+			if (localStorage.achPlanId=="2"){
 				$("#trLatTypePast").show();
 			}
 			
@@ -452,8 +522,8 @@ function achDataNext(){
 			$("#latType").val("");
 			$(".com_or_cluster_name").html("EPI Cluster/ Community Name<sup class='reqField'>*</sup>");
 			$(".hh_or_wp_id").html("Water Point ID(Same as Social Map)<sup class='reqField'>*</sup>");
-		}else if (achPlanSector=="Sanitation"){
-			if (achPlanId=="2"){
+		}else if (localStorage.achPlanSector=="Sanitation"){
+			if (localStorage.achPlanId=="2"){
 				$("#trLatTypePast").show();
 				}
 			$("#tblHandSan").show();
@@ -465,18 +535,18 @@ function achDataNext(){
 			$("#tbl_sanitation").show();
 			$(".com_or_cluster_name").html("EPI Cluster/ Community Name<sup class='reqField'>*</sup>");
 			$(".hh_or_wp_id").html("HHID(Same as Social Map)<sup class='reqField'>*</sup>");			
-		}else if(achPlanSector=="SchoolWash"){			
-			if(achPlanId=="4"){
+		}else if(localStorage.achPlanSector=="SchoolWash"){			
+			if(localStorage.achPlanId=="4"){
 				$("#divSchoolWash").show();
 				$("#tbl_school_lat").show();
 				$("#tbl_num_of_tap").hide();
-			}else if(achPlanId=="5"){
+			}else if(localStorage.achPlanId=="5"){
 				$("#tbl_school_lat").hide();
 				$("#divSchoolWash").show();
 				$("#tbl_num_of_tap").show();	
 			}						
 								
-		}else if(achPlanSector=="CommunityODF"){			
+		}else if(localStorage.achPlanSector=="CommunityODF"){			
 			$("#achWardOld").show();
 			$("#achCluster").show();
 			$("#epiClusterCom").show();
@@ -500,6 +570,7 @@ function achDataNext(){
 		
 		var url = "#achiveDataList";
 		$.mobile.navigate(url);
+		location.reload();				
 		//$(location).attr('href',url);
 	}
 }
@@ -508,6 +579,7 @@ function achDataNext(){
 //-----------------------------achivement data people support
 
 function achivementDataPSupport(){
+	
 	$(".errorChk").text("");
 	$("#sucChk").text("");	
 	
@@ -1650,7 +1722,6 @@ function syncDataAch(){
 							$("#btn_ach_submit").show();
 						}else if(result=='Failed4'){
 							//$(".errorChk").text('Failed to Submit');
-							
 							$(".errorChk").text('Already Declared');										
 							$("#btn_ach_submit").show();
 						}else if(result=='Failed5'){
@@ -1769,7 +1840,6 @@ function winAch(r) {
 //    console.log("Response = " + r.response);
 //    console.log("Sent = " + r.bytesSent);
 	$(".errorChk").text('File upload Successful. Syncing Data...');
-	
 	syncDataAch();
 }
 
