@@ -1650,6 +1650,7 @@ function syncDataAch(){
 							$("#btn_ach_submit").show();
 						}else if(result=='Failed4'){
 							//$(".errorChk").text('Failed to Submit');
+							
 							$(".errorChk").text('Already Declared');										
 							$("#btn_ach_submit").show();
 						}else if(result=='Failed5'){
