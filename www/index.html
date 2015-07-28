@@ -328,11 +328,11 @@
 				  </select>	
             </li>
         </ul>
-        <ul data-role="listview" data-inset="true" data-theme="d" id="achCluster"> 
+        <ul data-role="listview" data-inset="true" data-theme="d" id="achCluster">
             <li class="ui-field-contain" style="background-color:#F2F2F2; font-weight:bold;">EPI Cluster<sup class="reqField">*</sup></li>
 			<li class="ui-field-contain">
 				<select name="achClusterID" id="achClusterID" data-native-menu="false">
-						<option value="">EPI Cluster</option> 
+						<option value="">EPI Cluster</option>
 						<option value="Ka-1">Ka-1</option>
 						<option value="Ka-2">Ka-2</option>
 						<option value="Kha-1">Kha-1</option>
@@ -412,9 +412,7 @@
                         <td width="70%" style="vertical-align:middle;">Male (18+)</td>
                         <td width="30%"><input name="male" id="male" onBlur="totalPopulation();" placeholder="" value="" type="number"></td>
                         <td width="5" align="left"></td>
-                    </tr>
-                    
-                    
+                    </tr>                    
                     <tr>
                         <td width="70%" style="vertical-align:middle;">Girl (5+ to <=18)</td>
                         <td width="30%"><input name="girls" id="girls" placeholder="" value="" onBlur="totalPopulation();" min="0" type="number"></td>
@@ -425,6 +423,11 @@
                         <td width="30%"><input name="boys" id="boys" placeholder="" value="" min="0" onBlur="totalPopulation();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
+                    <tr >
+                        <td width="70%" style="vertical-align:middle;">Total Population<sup class="reqField">*</sup></td>
+                        <td width="30%"><input name="population" id="population"  placeholder="" value="" type="number" readonly="readonly" style="background-color:#EEEEEE;"></td>
+                        <td width="5" align="left"></td>
+                    </tr>   
 					
 					<tr>
                         <td width="70%" style="vertical-align:middle;">Disable Female</td>
@@ -436,11 +439,7 @@
                         <td width="30%"><input name="dapMale" id="dapMale" min="0" onBlur="totalPopulation();" placeholder="" value="" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
-                    <tr >
-                        <td width="70%" style="vertical-align:middle;">Total Population<sup class="reqField">*</sup></td>
-                        <td width="30%"><input name="population" id="population"  placeholder="" value="" type="number" readonly="readonly" style="background-color:#EEEEEE;"></td>
-                        <td width="5" align="left"></td>
-                    </tr>                   
+                                    
 			</table>
             <div id="handWashFacilities">
             	<br/>
@@ -489,10 +488,10 @@
             <br/>			
 			<table class="ui-body-d ui-shadow table-stripe ui-responsive" id="tblFacilityCount"  data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
 				   
-				  <tr id="trLatType">
-                        <td width="100%" style="vertical-align:middle;" colspan="2" > Type of Latrine(Present)<sup class="reqField">*</sup>
-							<select name="latType" id="latType" data-native-menu="false" >
-								 <option value="">Latrine Type</option>
+                    <tr id="trLatTypePast">
+                        <td width="100%" style="vertical-align:middle;" colspan="2" > Type of Latrine(Past)<sup class="reqField">*</sup>
+							<select name="latTypePast" id="latTypePast" data-native-menu="false" >
+								 <option value="">Latrine Type(Past)</option>
                                  <optgroup label="Improved Latrine">
                                      <option value="Improved-Piped sewer system">Piped sewer system</option>						
                                      <option value="Improved-Septic tank">Septic tank</option>
@@ -515,10 +514,10 @@
 							</select>							
 						</td>                        
                     </tr>
-                    <tr id="trLatTypePast">
-                        <td width="100%" style="vertical-align:middle;" colspan="2" > Type of Latrine(Past)<sup class="reqField">*</sup>
-							<select name="latTypePast" id="latTypePast" data-native-menu="false" >
-								 <option value="">Latrine Type(Past)</option>
+                    <tr id="trLatType">
+                        <td width="100%" style="vertical-align:middle;" colspan="2" > Type of Latrine(Present)<sup class="reqField">*</sup>
+							<select name="latType" id="latType" data-native-menu="false" >
+								 <option value="">Latrine Type</option>
                                  <optgroup label="Improved Latrine">
                                      <option value="Improved-Piped sewer system">Piped sewer system</option>						
                                      <option value="Improved-Septic tank">Septic tank</option>
@@ -639,29 +638,31 @@
 			</table>
             <br/>
              <table id="tbl_school_lat" class="ui-body-d ui-shadow table-stripe ui-responsive" data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
-                  
-					<tr>
+                  	 <tr valign="middle">
+                        <td colspan="3" ><strong>Number of latrine Repaired</strong></td>
+                  	</tr>
+					<!--<tr>
                         <td width="70%" style="vertical-align:middle;">Number of latrine Repaired</td>
                         <td width="30%"><input name="lat_rep" id="lat_rep" placeholder="" value="" min="0" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
-                    </tr>
+                    </tr>-->
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">boys</td>
+                        <td width="70%" style="vertical-align:middle;">boys<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="lat_boys" id="lat_boys" placeholder="" value="" min="0" onBlur="totalhwRehab();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">Girls</td>
+                        <td width="70%" style="vertical-align:middle;">Girls<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="lat_girls" id="lat_girls" placeholder="" value="" min="0" onBlur="totalhwRehab();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">Teachers</td>
+                        <td width="70%" style="vertical-align:middle;">Teachers<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="lat_teacher" id="lat_teacher" placeholder="" value="" min="0" onBlur="totalhwRehab();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr >
-                        <td width="70%" style="vertical-align:middle;">Total<sup class="reqField">*</sup></td>
+                        <td width="70%" style="vertical-align:middle;">Total</td>
                         <td width="30%"><input name="lat_total_population" id="lat_total_population"  placeholder="" value="" type="number" readonly="readonly" style="background-color:#EEEEEE;"></td>
                         <td width="5" align="left"></td>
                     </tr>                   
@@ -669,7 +670,7 @@
              <table id="tbl_num_of_tap" class="ui-body-d ui-shadow table-stripe ui-responsive" data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
                   
 					<tr>
-                        <td width="70%" style="vertical-align:middle;">Number of Tap</td>
+                        <td width="70%" style="vertical-align:middle;">Number of Tap Installed</td>
                         <td width="30%"><input name="num_of_tap" id="num_of_tap" placeholder="" value="" min="0" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
@@ -678,7 +679,7 @@
 			<table class="ui-body-d ui-shadow table-stripe ui-responsive"  data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
 				  	
                     <tr >
-                        <td colspan="2" ><strong>Installation of hand washing device</strong></td>
+                        <td colspan="2" ><strong>Rehabilitation of WASH Facilities</strong></td>
                   	</tr>
                     <tr >
                         <td width="100%" style="vertical-align:middle;" colspan="2">Starting date<sup class="reqField">*</sup>							
@@ -697,23 +698,23 @@
              <table class="ui-body-d ui-shadow table-stripe ui-responsive" data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
                
                <tr>
-                    <td width="70%" style="vertical-align:middle;">Number of HH</td>
+                    <td width="70%" style="vertical-align:middle;">Number of HH<sup class="reqField">*</sup></td>
                     <td width="30%"><input name="num_0f_hh" id="num_0f_hh" placeholder="" value="" min="0" onBlur="totalOdf();" type="number"></td>
                     <td width="5" align="left">&nbsp;</td>
                 </tr>
                 
                 <tr>
-                    <td width="70%" style="vertical-align:middle;">Adult</td>
+                    <td width="70%" style="vertical-align:middle;">Adult<sup class="reqField">*</sup></td>
                     <td width="30%"><input name="odf_adult" id="odf_adult" placeholder="" value="" onBlur="totalOdf();" min="0" type="number"></td>
                     <td width="5" align="left">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td width="70%" style="vertical-align:middle;">Children</td>
+                    <td width="70%" style="vertical-align:middle;">Children<sup class="reqField">*</sup></td>
                     <td width="30%"><input name="odf_child" id="odf_child" placeholder="" value="" min="0" onBlur="totalOdf();" type="number"></td>
                     <td width="5" align="left">&nbsp;</td>
                 </tr>
                  <tr >
-                    <td width="70%" style="vertical-align:middle;">Total<sup class="reqField">*</sup></td>
+                    <td width="70%" style="vertical-align:middle;">Total</td>
                     <td width="30%"><input name="odf_total" id="odf_total"  placeholder="" value="" type="number" readonly="readonly" style="background-color:#EEEEEE;"></td>
                     <td width="5" align="left"></td>
                 </tr> 
