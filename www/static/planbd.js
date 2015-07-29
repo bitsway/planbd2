@@ -43,10 +43,10 @@ function onErrorWq(error) {
    $(".errorChk").html("Failed to Confirmed Location.");
 }
 //---- online 
-var apipath="http://e.businesssolutionapps.com/planbd2/syncmobile/";
+//var apipath="http://e.businesssolutionapps.com/planbd2/syncmobile/";
 
 //--- local
-//var apipath="http://127.0.0.1:8000/planbd2/syncmobile/";
+var apipath="http://127.0.0.1:8000/planbd2/syncmobile/";
 
 
 var planFlag=0;
@@ -596,20 +596,12 @@ function achDataNext(){
 		
 		$(".errorChk").text("");
 		
-		
-		
-		location.reload();
-		
-		
-		//---------------------------------------------------------------------------------------
-		
-		//alert("ok");
-		
-		
+				
 		
 		var url = "#selectionConfirmed";
 		$.mobile.navigate(url);
 		
+		location.reload();
 		
 		
 						
@@ -1805,10 +1797,11 @@ function achiveDataSubmit(){
 						$("#btn_ach_submit").show();
 					}else{
 						//imagePathA="test"
-						if (imagePathA!=""){
-							$(".errorChk").text("Syncing photo..");
+						if (imagePathA!=""){							
+							//$(".errorChk").text("Syncing photo..");
 							imageName = localStorage.mobile_no+"_"+get_time+".jpg";
-							alert(imagePathA+'-'+imageName);						
+							$(".errorChk").text(imagePathA+'-'+imageName);													
+							
 							uploadPhotoAch(imagePathA, imageName);
 						}
 						
@@ -1854,6 +1847,7 @@ function syncDataAch(){
 											
 										}										
 										localStorage.ach_save=achTempStr2;
+										
 									}
 									
 							}
@@ -1949,9 +1943,9 @@ function showLatLong(){
 
 
 //Acheivement
-function getAchivementImage() {
+function getAchivementImage() {	
 	navigator.camera.getPicture(onSuccessA, onFailA, { quality: 10,
-		destinationType: Camera.DestinationType.FILE_URI });
+	destinationType: Camera.DestinationType.FILE_URI });
 }
 
 function onSuccessA(imageURI) {
