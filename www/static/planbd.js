@@ -598,11 +598,22 @@ function achDataNext(){
 		
 		
 		
-		location.reload();			
+		location.reload();
+		
+		
+		//---------------------------------------------------------------------------------------
+		
+		//alert("ok");
+		
+		
 		
 		var url = "#selectionConfirmed";
 		$.mobile.navigate(url);
 		
+		
+		
+						
+		//$(location).attr('href',url);
 	}
 }
 
