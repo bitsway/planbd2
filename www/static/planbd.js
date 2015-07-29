@@ -246,7 +246,8 @@ function waterAidClick(){
 	
 	}
 	
-$(document).ready(function(){	
+$(document).ready(function(){		
+	
 	$("#planlistDiv").html(localStorage.plan_list);	
 
 	
@@ -368,6 +369,7 @@ $(document).ready(function(){
 });
 
 
+
 //----------------back button
 function backClick(){
 	$(".errorChk").text("");
@@ -379,6 +381,8 @@ function backClick(){
 function achivementclick(){
 	$(".errorChk").text("");
 	$("#sucChk").text("");
+	localStorage.ach_temp="";
+	$("#achPhoto").val("");
 	
 	$(".activities").text(localStorage.achPlanActivities);
 	
@@ -507,7 +511,7 @@ function achivementclick(){
 	
 //------------------------------domain list 
 function achDataNext(){		
-	
+		
 	if($("#planlistDiv").find("input[name='activity_select']:checked").length==0){
 		$(".errorChk").text("Required Plan");
 	}else{
@@ -593,12 +597,120 @@ function achDataNext(){
 		$(".errorChk").text("");
 		
 		
-		var url = "#achiveDataList";
+		
+		location.reload();			
+		
+		var url = "#selectionConfirmed";
 		$.mobile.navigate(url);
-		location.reload();				
-		//$(location).attr('href',url);
+		
 	}
 }
+
+
+function achDataNext2(){
+		
+		$(".activities").text(localStorage.achPlanActivities);
+		
+		var achRevDetailsArray=localStorage.ach_temp.split('fdfd');
+		
+		//------------------
+		$( "input:radio[name='activity_select'][value='"+achRevDetailsArray[0]+"']" ).attr('checked','checked');
+		//$("#plan_select").val(achRevDetailsArray[0])
+		
+			
+		//alert(achRevDetailsArray[1]);
+		
+		$("#achWord").val(achRevDetailsArray[1]);
+		$("#achClusterID").val(achRevDetailsArray[2]);
+		//$("input:radio[name='hnd_event']" ).attr('checked','');
+		
+		$("#achID").val(achRevDetailsArray[7]);
+		
+		$("#population").val(achRevDetailsArray[8]);
+		//$("#household").val("");
+		$("#male").val(achRevDetailsArray[9]);
+		$("#female").val(achRevDetailsArray[10]);
+		//$("#girlsUnder").val("");
+		//$("#boysUnder").val("");
+		$("#girls").val(achRevDetailsArray[11]);
+		$("#boys").val(achRevDetailsArray[12]);
+		$("#dapMale").val(achRevDetailsArray[13]);
+		$("#dapFemale").val(achRevDetailsArray[14]);
+	
+		
+		
+		$("#san_conp_date").val(achRevDetailsArray[16]);	
+		$("#wp_tech").val("");
+		$("#wp_conp_date").val("");
+		
+		
+		$("#achWordNew").val(achRevDetailsArray[3]);
+		$("#epiComName").val(achRevDetailsArray[4]);
+		$("#villSubClusName").val(achRevDetailsArray[5]);
+		$("#nameOfHhhID").val(achRevDetailsArray[6]);
+		
+		$("#latType").val(achRevDetailsArray[15]);
+		$("#san_or_hw_conp_date").val(achRevDetailsArray[16]);
+		$("#schType").val(achRevDetailsArray[17]);
+		
+		$("#p_school_combo").val(achRevDetailsArray[18]);
+		$("#s_school_combo").val(achRevDetailsArray[19]);
+		
+		$("#sch_girl").val(achRevDetailsArray[20]);
+		$("#sch_boy").val(achRevDetailsArray[21]);
+		$("#totalStudent").val(eval(achRevDetailsArray[20])+eval(achRevDetailsArray[21]));
+		$("#teach_female").val(achRevDetailsArray[22]);
+		$("#teach_male").val(achRevDetailsArray[23]);
+		$("#totalTeacher").val(eval(achRevDetailsArray[22])+eval(achRevDetailsArray[23]));
+		$("#sch_dapFemale").val(achRevDetailsArray[24]);
+		$("#sch_dapMale").val(achRevDetailsArray[25]);
+		$("#totalDisable").val(eval(achRevDetailsArray[24])+eval(achRevDetailsArray[25]));
+		
+		$("#st_of_rehab_date").val(achRevDetailsArray[26]);
+		$("#schWash_conp_date").val(achRevDetailsArray[27]);
+		
+		$("#achOdfStatus").val(achRevDetailsArray[28]);
+		
+		$("#achPhoto").val(achRevDetailsArray[30]);
+		
+		startDt=achRevDetailsArray[31]
+		var achlat=$("#ach_lat").val(achRevDetailsArray[32]);
+		var achlong=$("#ach_long").val(achRevDetailsArray[33]);
+					
+		var image = document.getElementById('myImageA');
+		image.src = achRevDetailsArray[30];
+		imagePathA = achRevDetailsArray[30];
+		
+		$("#latTypePast").val(achRevDetailsArray[34]);
+		
+		$("input:radio[name='rec_hy_msg'][value='"+achRevDetailsArray[35]+"']").attr('checked','checked');
+		$("input:radio[name='location_hw_dev'][value='"+achRevDetailsArray[36]+"']").attr('checked','checked');
+		$("input:radio[name='available_hw_dev'][value='"+achRevDetailsArray[37]+"']").attr('checked','checked');
+		$("input:radio[name='available_soap'][value='"+achRevDetailsArray[38]+"']").attr('checked','checked');
+		
+		$("#lat_rep").val(achRevDetailsArray[39]);
+		$("#lat_boys").val(achRevDetailsArray[40]);
+		$("#lat_girls").val(achRevDetailsArray[41]);
+		$("#lat_teacher").val(achRevDetailsArray[42]);
+		$("#lat_total_population").val(eval(achRevDetailsArray[40])+eval(achRevDetailsArray[41])+eval(achRevDetailsArray[42]));
+		
+		$("#num_of_tap").val(achRevDetailsArray[43]);
+		
+		$("#num_0f_hh").val(achRevDetailsArray[44]);
+		$("#odf_adult").val(achRevDetailsArray[45]);
+		$("#odf_child").val(achRevDetailsArray[46]);
+		
+		$("#odf_total").val(eval(achRevDetailsArray[45])+eval(achRevDetailsArray[46]));
+		
+		//----------------------------------------------------------------------------
+	
+	
+	var url = "#achiveDataList";
+	$.mobile.navigate(url);
+	
+	}
+
+
 
 
 //-----------------------------achivement data people support
@@ -1183,6 +1295,7 @@ function achiveDataSave(){
 					
 					if (achivementStr==undefined || achivementStr==''){			
 						localStorage.ach_save=achivementSave
+						
 					}else{
 						var achiveSavArray=achivementStr.split('rdrd');
 						
@@ -1535,8 +1648,12 @@ function reviewDataNext(){
 			$(".errorChk").text("Select a Record");			
 	}else{
 		
+		//alert(localStorage.ach_save);
+		
 		var achivementRevArray2=localStorage.ach_save.split('rdrd');
 		var achRevDetails=achivementRevArray2[arrayId];
+		
+		localStorage.ach_temp=achRevDetails;
 		
 		var achRevDetailsArray=achRevDetails.split('fdfd');
 		
@@ -1545,7 +1662,7 @@ function reviewDataNext(){
 		//$("#plan_select").val(achRevDetailsArray[0])
 		
 			
-		
+		//alert(achRevDetailsArray[1]);
 		
 		$("#achWord").val(achRevDetailsArray[1]);
 		$("#achClusterID").val(achRevDetailsArray[2]);
@@ -1732,7 +1849,10 @@ function syncDataAch(){
 							
 							$( "input:radio[name='plan_select'][value='"+achPlanId+"']" ).attr('checked','');
 							$("#cbo_combo").val("");
-							
+							$("#ach_lat").val("");
+							$("#ach_long").val("");
+							$("#achPhoto").val("");
+														
 							achPlanId="";
 							achCBOid="";
 							$("#sucChk").text('Successfully Submitted');
