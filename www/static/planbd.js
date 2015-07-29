@@ -1798,9 +1798,9 @@ function achiveDataSubmit(){
 					}else{
 						//imagePathA="test"
 						if (imagePathA!=""){							
-							//$(".errorChk").text("Syncing photo..");
+							$(".errorChk").text("Syncing photo..");
 							imageName = localStorage.mobile_no+"_"+get_time+".jpg";
-							$(".errorChk").text(imagePathA+'-'+imageName);													
+							//$(".errorChk").text(imagePathA+'-'+imageName);													
 							
 							uploadPhotoAch(imagePathA, imageName);
 						}
