@@ -43,10 +43,10 @@ function onErrorWq(error) {
    $(".errorChk").html("Failed to Confirmed Location.");
 }
 //---- online 
-//var apipath="http://e.businesssolutionapps.com/planbd2/syncmobile/";
+var apipath="http://e.businesssolutionapps.com/planbd2/syncmobile/";
 
 //--- local
-var apipath="http://127.0.0.1:8000/planbd2/syncmobile/";
+//var apipath="http://127.0.0.1:8000/planbd2/syncmobile/";
 
 
 var planFlag=0;
