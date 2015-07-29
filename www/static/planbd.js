@@ -597,7 +597,8 @@ function achDataNext(){
 		$(".errorChk").text("");
 		
 		
-		
+		var url = "#selectionConfirmed";
+		$.mobile.navigate(url);
 		location.reload();
 		
 		
@@ -607,8 +608,7 @@ function achDataNext(){
 		
 		
 		
-		var url = "#selectionConfirmed";
-		$.mobile.navigate(url);
+
 		
 		
 		
