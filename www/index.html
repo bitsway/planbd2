@@ -98,8 +98,8 @@
                     <tr style="background-color:#FFFFFF; font-size:12px;">
 					  <td style="width:10%;" >Sl No</td>
                       <td style="width:20%;" >Report Date</td>					  
-                      <td style="width:50%" >Indicator</td>
-                      <td style="width:10%" >Population</td>
+                      <td style="width:60%" >Indicator</td>
+                      
                     </tr>
                     
 		</table>		
@@ -120,6 +120,7 @@
         <div class="errorChk"></div>
         <div id="reviewAchList"></div>
         <a data-role="button" onClick="reviewDataNext();"   data-transition="slide" >Next</a>
+        <br/>
         <a data-role="button" onClick="deleteAchReview();"   data-transition="slide" >Delete</a>
     </div><!----/header-->
 </div>
@@ -498,20 +499,20 @@
 				</table>
                 <table class="ui-body-d ui-shadow table-stripe ui-responsive" data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
                   <tr valign="middle">
-                        <td colspan="3" ><strong>Disable</strong></td>
+                        <td colspan="3" ><strong>Student with Disability</strong></td>
                   </tr>
 					<tr>
-                        <td width="70%" style="vertical-align:middle;">Female</td>
+                        <td width="70%" style="vertical-align:middle;">Girl</td>
                         <td width="30%"><input name="sch_dapFemale" id="sch_dapFemale" placeholder="" value="" min="0" onBlur="totalDStudent();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">Male</td>
+                        <td width="70%" style="vertical-align:middle;">Boy</td>
                         <td width="30%"><input name="sch_dapMale" id="sch_dapMale" placeholder="" value="" min="0" onBlur="totalDStudent();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr >
-                        <td width="70%" style="vertical-align:middle;">Student With Disability<sup class="reqField">*</sup></td>
+                        <td width="70%" style="vertical-align:middle;">Total Disable Student<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="totalDisable" id="totalDisable"  placeholder="" value="" type="number" disabled="disabled"></td>
                         <td width="5" align="left"></td>
                     </tr>                   
@@ -557,7 +558,7 @@
 			<table class="ui-body-d ui-shadow table-stripe ui-responsive"  data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
 				  	
                     <tr >
-                        <td colspan="2" ><strong>Rehabilitation of WASH Facilities</strong></td>
+                        <td colspan="2" ><span id="rehab_wf"></span></td>
                   	</tr>
                     <tr >
                         <td width="100%" style="vertical-align:middle;" colspan="2">Starting date<sup class="reqField">*</sup>							
