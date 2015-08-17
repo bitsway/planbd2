@@ -694,10 +694,17 @@ function achDataNext2(){
 	
 		
 		if(achRevDetailsArray[16]!=undefined){
+<<<<<<< HEAD
 			var sanCompArr=achRevDetailsArray[16].split("/");		
 			$("#san_or_hw_conp_y").val(sanCompArr[2]);	
 			$("#san_or_hw_conp_m").val(sanCompArr[0]);
 			$("#san_or_hw_conp_d").val(sanCompArr[1]);
+=======
+			var sanCompArr=achRevDetailsArray[16].split("-");		
+			$("#san_or_hw_conp_y").val(sanCompArr[0]);	
+			$("#san_or_hw_conp_m").val(sanCompArr[1]);
+			$("#san_or_hw_conp_d").val(sanCompArr[2]);
+>>>>>>> origin/master
 			}
 		//$("#san_conp_date").val(achRevDetailsArray[16]);
 		
@@ -730,6 +737,7 @@ function achDataNext2(){
 		$("#totalDisable").val(eval(achRevDetailsArray[24])+eval(achRevDetailsArray[25]));
 		
 		
+<<<<<<< HEAD
 		if(achRevDetailsArray[26]!=undefined){
 			var stRehabArr=achRevDetailsArray[26].split("/");
 			$("#st_of_rehab_y").val(stRehabArr[2]);	
@@ -742,6 +750,20 @@ function achDataNext2(){
 			$("#schWash_conp_y").val(schWashArr[2]);
 			$("#schWash_conp_m").val(schWashArr[0]);
 			$("#schWash_conp_d").val(schWashArr[1]);
+=======
+		if(achRevDetailsArray[27]!=undefined){
+			var stRehabArr=achRevDetailsArray[27].split("-");
+			$("#st_of_rehab_y").val(stRehabArr[0]);	
+			$("#st_of_rehab_m").val(stRehabArr[1]);
+			$("#st_of_rehab_d").val(stRehabArr[2]);
+		}
+		
+		if(achRevDetailsArray[27]!=undefined){
+			var schWashArr=achRevDetailsArray[27].split("-");
+			$("#schWash_conp_y").val(schWashArr[0]);
+			$("#schWash_conp_m").val(schWashArr[1]);
+			$("#schWash_conp_d").val(schWashArr[2]);
+>>>>>>> origin/master
 		}
 		
 		$("#achOdfStatus").val(achRevDetailsArray[28]);
@@ -855,7 +877,10 @@ function achivementDataPSupport(){
 	var sanHwCompDateY=$("#san_or_hw_conp_y").val();	
 	var sanHwCompDateM=$("#san_or_hw_conp_m").val();
 	var sanHwCompDateD=$("#san_or_hw_conp_d").val();
+<<<<<<< HEAD
 	
+=======
+>>>>>>> origin/master
 	if(sanHwCompDateD.length==1){
 		sanHwCompDateD="0"+sanHwCompDateD
 		}
@@ -863,6 +888,7 @@ function achivementDataPSupport(){
 	if(sanHwCompDateM.length==1){
 		sanHwCompDateM="0"+sanHwCompDateM
 		}
+<<<<<<< HEAD
 		
 	var sanHwCompDate=sanHwCompDateM+"/"+sanHwCompDateD+"/"+sanHwCompDateY;	
 	
@@ -871,6 +897,13 @@ function achivementDataPSupport(){
 	var chkSanCompDate=new Date(sanHwCompDate);
 	
 	
+=======
+	
+	//alert(sanHwCompDateM);	
+	
+	var sanHwCompDate=sanHwCompDateY+"-"+sanHwCompDateM+"-"+sanHwCompDateD;	
+	var chkSanCompDate=new Date(sanHwCompDate);
+>>>>>>> origin/master
 	
 	//hand wash
 	var recHyMsg=$("input[name='rec_hy_msg']:checked").val();
@@ -906,10 +939,14 @@ function achivementDataPSupport(){
 		schRehabInsDateM="0"+schRehabInsDateM
 		}
 			
+<<<<<<< HEAD
 	var schRehabInsDate=schRehabInsDateM+"/"+schRehabInsDateD+"/"+schRehabInsDateY;
 	
 	var errSchRehabInsDate=schRehabInsDateY+"/"+schRehabInsDateD+"/"+schRehabInsDateM;
 		
+=======
+	var schRehabInsDate=schRehabInsDateY+"-"+schRehabInsDateM+"-"+schRehabInsDateD;	
+>>>>>>> origin/master
 	var chkSchRehabInsDate=new Date(schRehabInsDate);
 	
 	var schWashCompDateY=$("#schWash_conp_y").val();
@@ -922,10 +959,14 @@ function achivementDataPSupport(){
 	if(schWashCompDateM.length==1){
 		schWashCompDateM="0"+schWashCompDateM
 		}	
+<<<<<<< HEAD
 	var schWashCompDate=schWashCompDateM+"/"+schWashCompDateD+"/"+schWashCompDateY;
 	
 	var errSchWashCompDate=schWashCompDateY+"/"+schWashCompDateM+"/"+schWashCompDateD;
 		
+=======
+	var schWashCompDate=schWashCompDateY+"-"+schWashCompDateM+"-"+schWashCompDateD;	
+>>>>>>> origin/master
 	var chkSchwCompDate=new Date(schWashCompDate);
 	
 	
@@ -1074,6 +1115,7 @@ if (localStorage.achPlanSector=="Sanitation" || localStorage.achPlanSector=="Han
 	}else if(sanHwCompDate=="") {
 		$(".errorChk").text("Required ComPletion Date. ");
 	}else{
+<<<<<<< HEAD
 		
 		if (isNaN(chkSanCompDate)==true){
 				date_flag=false;
@@ -1081,6 +1123,12 @@ if (localStorage.achPlanSector=="Sanitation" || localStorage.achPlanSector=="Han
 		}else if (chkSanCompDate=='Invalid Date'){
 				date_flag=false;
 				dateError="Invalid Completion Date "+errSanHwCompDate;
+=======
+				
+		if (chkSanCompDate=='Invalid Date'){
+				date_flag=false;
+				dateError="Invalid Completion Date "+sanHwCompDate;
+>>>>>>> origin/master
 		}
 		
 		if (date_flag==false){				
@@ -1203,6 +1251,7 @@ if (localStorage.achPlanSector=="Sanitation" || localStorage.achPlanSector=="Han
 		}else if (schRehabInsDate=="" || schWashCompDate=="" ){
 				$(".errorChk").text("Required Reabilitation and Completion Date ");						
 		}else{
+<<<<<<< HEAD
 			if (isNaN(chkSchRehabInsDate)==true){
 				date_flag=false;
 				dateError="Invalid Instalation Date "+errSchRehabInsDate;				
@@ -1218,6 +1267,18 @@ if (localStorage.achPlanSector=="Sanitation" || localStorage.achPlanSector=="Han
 			}
 				
 						
+=======
+			
+			if (chkSchRehabInsDate=='Invalid Date'){
+				date_flag=false;
+				dateError="Invalid Instalation Date "+schRehabInsDate;
+			}else if (chkSchwCompDate=='Invalid Date'){
+				date_flag=false;
+				dateError="Invalid Completion Date "+schWashCompDate;
+			}
+			
+			
+>>>>>>> origin/master
 			if (date_flag==false){				
 				$(".errorChk").text(dateError);
 			}else{			
@@ -1699,6 +1760,7 @@ function achiveDataSave(){
 						$("#st_of_rehab_d").val("");
 						$("#schWash_conp_d").val("");
 						
+<<<<<<< HEAD
 						$("#san_or_hw_conp_y").val("");	
 						$("#san_or_hw_conp_m").val("");
 						$("#san_or_hw_conp_d").val("");
@@ -1711,6 +1773,8 @@ function achiveDataSave(){
 						$("#schWash_conp_m").val("");
 						$("#schWash_conp_d").val("");
 						
+=======
+>>>>>>> origin/master
 						reviewAchDisplayFlag==false;
 						arrayId=-1;
 						
@@ -1882,6 +1946,7 @@ function reviewAchiveData(){
 			$("#st_of_rehab_d").val("");
 			$("#schWash_conp_d").val("");
 			
+<<<<<<< HEAD
 			$("#san_or_hw_conp_y").val("");	
 			$("#san_or_hw_conp_m").val("");
 			$("#san_or_hw_conp_d").val("");
@@ -1895,6 +1960,8 @@ function reviewAchiveData(){
 			$("#schWash_conp_d").val("");
 			
 			
+=======
+>>>>>>> origin/master
 			reviewAchDisplayFlag==false;
 			arrayId=-1;
 			
