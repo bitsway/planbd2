@@ -360,8 +360,10 @@
                             <input type="radio" name="available_soap" id="available_soap_n" value="NO">
                             <label for="available_soap_n">NO</label>
                         </fieldset>
+                        
                     </li>
                 </ul>
+               
           </div>      
             <br/>			
 			<table class="ui-body-d ui-shadow table-stripe ui-responsive" id="tblFacilityCount"  data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
@@ -419,8 +421,21 @@
 						</td>                        
                     </tr>					                  
                     <tr>
-                        <td width="100%" style="vertical-align:middle;" colspan="2">Completion Date<sup class="reqField">*</sup>							
-							<input type="date" name="san_or_hw_conp_date" id="san_or_hw_conp_date" data-role="date">
+                        <td width="100%" style="vertical-align:middle;" colspan="2">Completion Date<sup class="reqField">*</sup>                            
+                            <div class="ui-grid-d">
+								<div class="ui-block-a">
+                                		<input type="number" class="inYear" name="san_or_hw_conp_y" id="san_or_hw_conp_y" value="" maxlength="4"  >                                 								
+								</div>
+                                <div class="ui-block-b" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
+								<div class="ui-block-c">
+								  		<input type="number" class="inMonth" name="san_or_hw_conp_m" id="san_or_hw_conp_m" value="" maxlength="2"  >								
+								</div>
+                                <div class="ui-block-d" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
+								<div class="ui-block-e" >
+										<input type="number" name="san_or_hw_conp_d" id="san_or_hw_conp_d" value="" placeholder="dd" maxlength="2"  >			
+								</div>	
+									
+							</div>
 						</td>                        
                     </tr>						
                     
@@ -526,26 +541,36 @@
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">boys<sup class="reqField">*</sup></td>
+                        <td width="70%" style="vertical-align:middle;">Only for boys<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="lat_boys" id="lat_boys" placeholder="" value="" min="0" onBlur="totalhwRehab();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">Girls<sup class="reqField">*</sup></td>
+                        <td width="70%" style="vertical-align:middle;">Only for girls<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="lat_girls" id="lat_girls" placeholder="" value="" min="0" onBlur="totalhwRehab();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">Teachers<sup class="reqField">*</sup></td>
+                        <td width="70%" style="vertical-align:middle;">Only for teachers<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="lat_teacher" id="lat_teacher" placeholder="" value="" min="0" onBlur="totalhwRehab();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
-                    <tr >
+					<tr>
+                        <td width="70%" style="vertical-align:middle;">For boys and girls</td>
+                        <td width="30%"><input name="lat_boys_and_girls" id="lat_boys_and_girls" placeholder="" value="" min="0" onBlur="totalhwRehab();" type="number"></td>
+                        <td width="5" align="left">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td width="70%" style="vertical-align:middle;">For all</td>
+                        <td width="30%"><input name="lat_for_all" id="lat_for_all" placeholder="" value="" min="0" onBlur="totalhwRehab();" type="number"></td>
+                        <td width="5" align="left">&nbsp;</td>
+                    </tr>
+                     <tr >
                         <td width="70%" style="vertical-align:middle;">Total</td>
                         <td width="30%"><input name="lat_total_population" id="lat_total_population"  placeholder="" value="" type="number" disabled="disabled"></td>
                         <td width="5" align="left"></td>
-                    </tr>                   
-			</table>
+                    </tr>    
+             </table>
              <table id="tbl_num_of_tap" class="ui-body-d ui-shadow table-stripe ui-responsive" data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
                   
 					<tr>
@@ -562,12 +587,40 @@
                   	</tr>
                     <tr >
                         <td width="100%" style="vertical-align:middle;" colspan="2">Starting date<sup class="reqField">*</sup>							
-							<input type="date" name="st_of_rehab_date" id="st_of_rehab_date" data-role="date">
+							                            
+                            <div class="ui-grid-d">
+								<div class="ui-block-a">
+                                		<input type="number" class="inYear" name="st_of_rehab_y" id="st_of_rehab_y" value="" maxlength="4"  >                                 								
+								</div>
+                                <div class="ui-block-b" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
+								<div class="ui-block-c">
+								  		<input type="number" class="inMonth" name="st_of_rehab_m" id="st_of_rehab_m" value="" maxlength="2"  >								
+								</div>
+                                <div class="ui-block-d" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
+								<div class="ui-block-e" >
+										<input type="number" name="st_of_rehab_d" id="st_of_rehab_d" value="" placeholder="dd" maxlength="2"  >			
+								</div>	
+									
+							</div>
 						</td>                        
                     </tr>                  
                     <tr>
-                        <td width="100%" style="vertical-align:middle;" colspan="2">Completion Date<sup class="reqField">*</sup>							
-							<input type="date" name="schWash_conp_date" id="schWash_conp_date" data-role="date">
+                        <td width="100%" style="vertical-align:middle;" colspan="2">Completion Date<sup class="reqField">*</sup>				
+                            
+                            <div class="ui-grid-d">
+								<div class="ui-block-a">
+                                		<input type="number" class="inYear" name="schWash_conp_y" id="schWash_conp_y" value=""  >                                 								
+								</div>
+                                <div class="ui-block-b" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
+								<div class="ui-block-c">
+								  		<input type="number" class="inMonth" name="schWash_conp_m" id="schWash_conp_m" value=""  >								
+								</div>
+                                <div class="ui-block-d" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
+								<div class="ui-block-e" >
+										<input type="number" name="schWash_conp_d" id="schWash_conp_d" value="" placeholder="dd"  >			
+								</div>	
+									
+							</div>
 						</td>                        
                     </tr>						
                     
