@@ -242,8 +242,8 @@
 			<li class="ui-field-contain">
                 <input name="epiComName" id="epiComName" placeholder="" value="" type="text" maxlength="50" >
             </li>
-            <li class="ui-field-contain" style="background-color:#F2F2F2; font-weight:bold;">Village/ Para (SubCluster Name)</li>
-			<li class="ui-field-contain">
+            <li class="ui-field-contain vill_para" style="background-color:#F2F2F2; font-weight:bold;">Village/ Para (SubCluster Name)</li>
+			<li class="ui-field-contain vill_para">
                 <input name="villSubClusName" id="villSubClusName" placeholder="" value="" type="text" maxlength="50" >
             </li>
         </ul>
@@ -277,40 +277,40 @@
                         <td colspan="3" ><strong>Beneficiary Count</strong></td>
                   </tr>
 				  <tr>
-                        <td width="70%" style="vertical-align:middle;">Female (18+)</td>
+                        <td width="70%" style="vertical-align:middle;">Female (18+)<sup class="reqField">*</sup></td>
                         <td width="30%">
                         <input name="female" id="female" placeholder="" onBlur="totalPopulation();" value="" type="number"></td>
                         <td width="5" align="left"></td>
                     </tr>
                     
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">Male (18+)</td>
+                        <td width="70%" style="vertical-align:middle;">Male (18+)<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="male" id="male" onBlur="totalPopulation();" placeholder="" value="" type="number"></td>
                         <td width="5" align="left"></td>
                     </tr>                    
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">Girl (<18)</td>
+                        <td width="70%" style="vertical-align:middle;">Girl (<18)<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="girls" id="girls" placeholder="" value="" onBlur="totalPopulation();" min="0" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">Boy (<18)</td>
+                        <td width="70%" style="vertical-align:middle;" >Boy (<18)<sup class="reqField">*</sup> </td>
                         <td width="30%"><input name="boys" id="boys" placeholder="" value="" min="0" onBlur="totalPopulation();" type="number" ></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr >
-                        <td width="70%" style="vertical-align:middle;">Total Population<sup class="reqField">*</sup></td>
+                        <td width="70%" style="vertical-align:middle;">Total Population</td>
                         <td width="30%"><input name="population" id="population"  placeholder="" value="" type="number" disabled="disabled" ></td>
                         <td width="5" align="left"></td>
                     </tr>   
 					
 					<tr>
-                        <td width="70%" style="vertical-align:middle;">Disable Female</td>
+                        <td width="70%" style="vertical-align:middle;">Disable Female<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="dapFemale" id="dapFemale" min="0"  placeholder="" value="" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">Disable Male</td>
+                        <td width="70%" style="vertical-align:middle;">Disable Male<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="dapMale" id="dapMale" min="0"  placeholder="" value="" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
@@ -323,7 +323,7 @@
             	<br/>
                 <ul data-role="listview" data-inset="true" >
                     <li style="background-color:#F2F2F2; font-weight:bold;">Status of Hand washing at HH</li>
-                    <li style="background-color:#F2F2F2;">Received Hygiene Message</li>
+                    <li style="background-color:#F2F2F2;">Received Hygiene Message<sup class="reqField">*</sup></li>
                     <li class="ui-field-contain">
                         <fieldset data-role="controlgroup" data-type="horizontal">
                             <input type="radio" name="rec_hy_msg" id="rec_hy_msg_y" value="YES">
@@ -333,7 +333,7 @@
                         </fieldset>
                     </li>
                
-                    <li style="background-color:#F2F2F2;">Location of Hand washing device (within 5 meters)</li>
+                    <li style="background-color:#F2F2F2;">Location of Hand washing device (within 5 meters)<sup class="reqField">*</sup></li>
                     <li class="ui-field-contain">
                         <fieldset data-role="controlgroup" data-type="horizontal">
                             <input type="radio" name="location_hw_dev" id="location_hw_dev_y" value="YES">
@@ -343,7 +343,7 @@
                         </fieldset>
                     </li>
                 
-                    <li style="background-color:#F2F2F2;">Availability of water into HW Device</li>
+                    <li style="background-color:#F2F2F2;">Availability of water into HW Device<sup class="reqField">*</sup></li>
                     <li class="ui-field-contain">
                         <fieldset data-role="controlgroup" data-type="horizontal">
                             <input type="radio" name="available_hw_dev" id="available_hw_dev_y" value="YES">
@@ -352,7 +352,7 @@
                             <label for="available_hw_dev_n">NO</label>
                         </fieldset>
                     </li>
-                     <li style="background-color:#F2F2F2;">Availability of soap</li>
+                     <li style="background-color:#F2F2F2;">Availability of soap<sup class="reqField">*</sup></li>
                     <li class="ui-field-contain">
                         <fieldset data-role="controlgroup" data-type="horizontal">
                             <input type="radio" name="available_soap" id="available_soap_y" value="YES">
@@ -424,27 +424,68 @@
                         <td width="100%" style="vertical-align:middle;" colspan="2">Completion Date<sup class="reqField">*</sup>                            
                             <div class="ui-grid-d">
 								<div class="ui-block-a">
-<<<<<<< HEAD
-                                		<input type="number" class="inYear" name="san_or_hw_conp_y" id="san_or_hw_conp_y" value="" maxlength="4"  >                                 								
+                                		<select name="san_or_hw_conp_y" id="san_or_hw_conp_y" data-native-menu="false" >
+                                        	<option value="">Select Year</option>
+                                            <option value="2015">2015</option>
+                                        </select>                                		                                								
 								</div>
                                 <div class="ui-block-b" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
 								<div class="ui-block-c">
-								  		<input type="number" class="inMonth" name="san_or_hw_conp_m" id="san_or_hw_conp_m" value="" maxlength="2"  >								
+                                		<select class="inMonth" name="san_or_hw_conp_m" id="san_or_hw_conp_m" data-native-menu="false" >
+                                        	<option value="">Select Month</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+								  										
 								</div>
                                 <div class="ui-block-d" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
 								<div class="ui-block-e" >
-										<input type="number" name="san_or_hw_conp_d" id="san_or_hw_conp_d" value="" placeholder="dd" maxlength="2"  >			
-=======
-                                		<input type="number" class="inYear" name="san_or_hw_conp_y" id="san_or_hw_conp_y" value=""  >                                 								
-								</div>
-                                <div class="ui-block-b" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
-								<div class="ui-block-c">
-								  		<input type="number" class="inMonth" name="san_or_hw_conp_m" id="san_or_hw_conp_m" value=""  >								
-								</div>
-                                <div class="ui-block-d" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
-								<div class="ui-block-e" >
-										<input type="number" name="san_or_hw_conp_d" id="san_or_hw_conp_d" value="" placeholder="dd"  >			
->>>>>>> origin/master
+                                		
+                                		<select name="san_or_hw_conp_d" id="san_or_hw_conp_d" data-native-menu="false" >
+                                        	<option value="">Select Day</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                            <option value="31">31</option>                                            
+                                        </select>
+													
 								</div>	
 									
 							</div>
@@ -463,7 +504,7 @@
              
             <table class="ui-body-d ui-shadow table-stripe ui-responsive" data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
                     <tr valign="middle">
-                        <td colspan="3" ><strong>School</strong></td>
+                        <td colspan="3" ><strong>School</strong><sup class="reqField">*</sup></td>
                   </tr>
                    <tr valign="middle">
                         <td colspan="3" >
@@ -486,14 +527,14 @@
                         <td colspan="3" ><strong>Student</strong></td>
                   </tr>
 				  <tr>
-                        <td width="70%" style="vertical-align:middle;">Girl</td>
+                        <td width="70%" style="vertical-align:middle;">Girl<sup class="reqField">*</sup></td>
                         <td width="30%">
                         <input name="sch_girl" id="sch_girl" placeholder="" onBlur="totalStudent();" value="" type="number"></td>
                         <td width="5" align="left"></td>
                     </tr>
                     
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">Boy</td>
+                        <td width="70%" style="vertical-align:middle;">Boy<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="sch_boy" id="sch_boy" onBlur="totalStudent();" placeholder="" value="" type="number"></td>
                         <td width="5" align="left"></td>
                     </tr>
@@ -509,17 +550,17 @@
                   </tr>
                     
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">Female</td>
+                        <td width="70%" style="vertical-align:middle;">Female<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="teach_female" id="teach_female" placeholder="" value="" onBlur="totalTeacher();" min="0" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">Male</td>
+                        <td width="70%" style="vertical-align:middle;">Male<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="teach_male" id="teach_male" placeholder="" value="" min="0" onBlur="totalTeacher();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                      <tr >
-                        <td width="70%" style="vertical-align:middle;">Total<sup class="reqField">*</sup></td>
+                        <td width="70%" style="vertical-align:middle;">Total</td>
                         <td width="30%"><input name="totalTeacher" id="totalTeacher"  placeholder="" value="" type="number" disabled="disabled"></td>
                         <td width="5" align="left"></td>
                     </tr> 
@@ -529,17 +570,17 @@
                         <td colspan="3" ><strong>Student with Disability</strong></td>
                   </tr>
 					<tr>
-                        <td width="70%" style="vertical-align:middle;">Girl</td>
+                        <td width="70%" style="vertical-align:middle;">Girl<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="sch_dapFemale" id="sch_dapFemale" placeholder="" value="" min="0" onBlur="totalDStudent();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">Boy</td>
+                        <td width="70%" style="vertical-align:middle;">Boy<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="sch_dapMale" id="sch_dapMale" placeholder="" value="" min="0" onBlur="totalDStudent();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr >
-                        <td width="70%" style="vertical-align:middle;">Total Disable Student<sup class="reqField">*</sup></td>
+                        <td width="70%" style="vertical-align:middle;">Total Disable Student</td>
                         <td width="30%"><input name="totalDisable" id="totalDisable"  placeholder="" value="" type="number" disabled="disabled"></td>
                         <td width="5" align="left"></td>
                     </tr>                   
@@ -568,12 +609,12 @@
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
 					<tr>
-                        <td width="70%" style="vertical-align:middle;">For boys and girls</td>
+                        <td width="70%" style="vertical-align:middle;">For boys and girls<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="lat_boys_and_girls" id="lat_boys_and_girls" placeholder="" value="" min="0" onBlur="totalhwRehab();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td width="70%" style="vertical-align:middle;">For all</td>
+                        <td width="70%" style="vertical-align:middle;">For all<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="lat_for_all" id="lat_for_all" placeholder="" value="" min="0" onBlur="totalhwRehab();" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
@@ -581,34 +622,35 @@
                         <td width="70%" style="vertical-align:middle;">Total</td>
                         <td width="30%"><input name="lat_total_population" id="lat_total_population"  placeholder="" value="" type="number" disabled="disabled"></td>
                         <td width="5" align="left"></td>
-<<<<<<< HEAD
                     </tr>    
-=======
-                    </tr>                   
-			</table>
-            <table id="tbl_lat_boys_girls" class="ui-body-d ui-shadow table-stripe ui-responsive" data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
-                  
-					<tr>
-                        <td width="70%" style="vertical-align:middle;">For boys and girls</td>
-                        <td width="30%"><input name="lat_boys_and_girls" id="lat_boys_and_girls" placeholder="" value="" min="0" type="number"></td>
-                        <td width="5" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td width="70%" style="vertical-align:middle;">For all</td>
-                        <td width="30%"><input name="lat_for_all" id="lat_for_all" placeholder="" value="" min="0" type="number"></td>
-                        <td width="5" align="left">&nbsp;</td>
-                    </tr>
->>>>>>> origin/master
              </table>
              <table id="tbl_num_of_tap" class="ui-body-d ui-shadow table-stripe ui-responsive" data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
                   
 					<tr>
-                        <td width="70%" style="vertical-align:middle;">Number of Tap Installed</td>
+                        <td width="70%" style="vertical-align:middle;">Number of Tap Installed<sup class="reqField">*</sup></td>
                         <td width="30%"><input name="num_of_tap" id="num_of_tap" placeholder="" value="" min="0" type="number"></td>
                         <td width="5" align="left">&nbsp;</td>
                     </tr>
              </table>
-            <br/>	
+            
+            <ul id="schBudgetUl" data-role="listview" data-inset="true" >
+            		<br/>
+                    <li style="background-color:#F2F2F2;">Does the school maintain/has budget for O&M of WASH Facilities?<sup class="reqField">*</sup> </li>
+                    <li class="ui-field-contain">
+                        <fieldset data-role="controlgroup" data-type="horizontal" onchange="chkBudget();" >
+                            <input type="radio" name="sch_badget" id="sch_badget_y" value="YES">
+                            <label for="sch_badget_y">YES</label>
+                            <input type="radio" name="sch_badget" id="sch_badget_n" value="NO">
+                            <label for="sch_badget_n">NO</label>
+                        </fieldset>
+                    </li>               
+                    <li class="bud_amt" style="background-color:#F2F2F2;">Amount of annual budget(Taka)<sup class="reqField">*</sup> </li>
+                    <li class="ui-field-contain bud_amt">
+                        <input name="anl_budget_amt" id="anl_budget_amt" placeholder="" value="" min="0" type="number">
+                    </li>
+            </ul>
+            <br/>
+            	
 			<table class="ui-body-d ui-shadow table-stripe ui-responsive"  data-role="table" data-theme="d"  data-mode="display:none" style="cell-spacing:0px;">
 				  	
                     <tr >
@@ -616,55 +658,145 @@
                   	</tr>
                     <tr >
                         <td width="100%" style="vertical-align:middle;" colspan="2">Starting date<sup class="reqField">*</sup>							
-							                            
-                            <div class="ui-grid-d">
+							 <div class="ui-grid-d">
 								<div class="ui-block-a">
-<<<<<<< HEAD
-                                		<input type="number" class="inYear" name="st_of_rehab_y" id="st_of_rehab_y" value="" maxlength="4"  >                                 								
+                                		<select name="st_of_rehab_y" id="st_of_rehab_y" data-native-menu="false" >
+                                        	<option value="">Select Year</option>
+                                            <option value="2015">2015</option>
+                                        </select>                                		                                								
 								</div>
                                 <div class="ui-block-b" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
 								<div class="ui-block-c">
-								  		<input type="number" class="inMonth" name="st_of_rehab_m" id="st_of_rehab_m" value="" maxlength="2"  >								
+                                		<select class="inMonth" name="st_of_rehab_m" id="st_of_rehab_m" data-native-menu="false" >
+                                        	<option value="">Select Month</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+								  										
 								</div>
                                 <div class="ui-block-d" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
 								<div class="ui-block-e" >
-										<input type="number" name="st_of_rehab_d" id="st_of_rehab_d" value="" placeholder="dd" maxlength="2"  >			
-=======
-                                		<input type="number" class="inYear" name="st_of_rehab_y" id="st_of_rehab_y" value=""  >                                 								
-								</div>
-                                <div class="ui-block-b" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
-								<div class="ui-block-c">
-								  		<input type="number" class="inMonth" name="st_of_rehab_m" id="st_of_rehab_m" value=""  >								
-								</div>
-                                <div class="ui-block-d" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
-								<div class="ui-block-e" >
-										<input type="number" name="st_of_rehab_d" id="st_of_rehab_d" value="" placeholder="dd"  >			
->>>>>>> origin/master
+                                		
+                                		<select name="st_of_rehab_d" id="st_of_rehab_d" data-native-menu="false" >
+                                        	<option value="">Select Day</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                            <option value="31">31</option>                                            
+                                        </select>
+													
 								</div>	
 									
-							</div>
+							</div>                           
+                            
 						</td>                        
                     </tr>                  
                     <tr>
                         <td width="100%" style="vertical-align:middle;" colspan="2">Completion Date<sup class="reqField">*</sup>				
-                            
                             <div class="ui-grid-d">
 								<div class="ui-block-a">
-                                		<input type="number" class="inYear" name="schWash_conp_y" id="schWash_conp_y" value=""  >                                 								
+                                		<select name="schWash_conp_y" id="schWash_conp_y" data-native-menu="false" >
+                                        	<option value="">Select Year</option>
+                                            <option value="2015">2015</option>
+                                        </select>                                		                                								
 								</div>
                                 <div class="ui-block-b" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
 								<div class="ui-block-c">
-								  		<input type="number" class="inMonth" name="schWash_conp_m" id="schWash_conp_m" value=""  >								
+                                		<select class="inMonth" name="schWash_conp_m" id="schWash_conp_m" data-native-menu="false" >
+                                        	<option value="">Select Month</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+								  										
 								</div>
                                 <div class="ui-block-d" style="width:5%; padding:1%;">&nbsp;/&nbsp;</div>
 								<div class="ui-block-e" >
-										<input type="number" name="schWash_conp_d" id="schWash_conp_d" value="" placeholder="dd"  >			
-								</div>	
-									
-							</div>
+                                		
+                                		<select name="schWash_conp_d" id="schWash_conp_d" data-native-menu="false" >
+                                        	<option value="">Select Day</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                            <option value="31">31</option>                                            
+                                        </select>													
+								</div>									
+							</div>                            
 						</td>                        
-                    </tr>						
-                    
+                    </tr>                   
          	</table>
             </div>
             <div id="div_odf">
