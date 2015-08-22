@@ -125,6 +125,7 @@ var achAvailableHwdev='';
 var achAvailableSoap='';
 
 var achOdfStatus='';
+var achDateOfDecCer='';
 var achHH='';
 var	achOdfAdult='';
 var	achOdfChild='';	
@@ -532,7 +533,12 @@ function achivementclick(){
 		
 		$("#schWash_conp_y").val("");
 		$("#schWash_conp_m").val("");
-		$("#schWash_conp_d").val("");	
+		$("#schWash_conp_d").val("");
+		
+		$("#dec_or_cer_y").val("");
+		$("#dec_or_cer_m").val("");
+		$("#dec_or_cer_d").val("");
+			
 		
 		$("#ach_lat").val("");
 		$("#ach_long").val("");
@@ -674,7 +680,10 @@ function achDataNext2(){
 		
 		$("#schWash_conp_y").val(year);
 		$("#schWash_conp_m").val(month);
-	
+		
+		$("#dec_or_cer_y").val(year);
+		$("#dec_or_cer_m").val(month);
+			
 	
 		if(localStorage.schoolType=="Primary"){
 			$('#primarySchDiv').show();
@@ -803,7 +812,12 @@ function achDataNext2(){
 		
 		$("#odf_total").val(eval(achRevDetailsArray[44])+eval(achRevDetailsArray[45]));
 		
-		
+		if(achRevDetailsArray[50]!=undefined){
+			var schWashArr=achRevDetailsArray[50].split("/");
+			$("#dec_or_cer_y").val(schWashArr[2]);
+			$("#dec_or_cer_m").val(schWashArr[0]);
+			$("#dec_or_cer_d").val(schWashArr[1]);
+		}
 		
 		//----------------------------------------------------------------------------
 	
@@ -976,6 +990,24 @@ function achivementDataPSupport(){
 	var odfHH=$("#num_0f_hh").val();
 	var odfAdult=$("#odf_adult").val();
 	var odfChild=$("#odf_child").val();
+	
+	var decCerDateY=$("#dec_or_cer_y").val();
+	var decCerDateDateM=$("#dec_or_cer_m").val();
+	var decCerDateDateD=$("#dec_or_cer_d").val();
+	
+	if(decCerDateDateD.length==1){
+		decCerDateDateD="0"+decCerDateDateD
+		}
+	if(decCerDateDateM.length==1){
+		decCerDateDateM="0"+decCerDateDateM
+		}	
+	var decCerDate=decCerDateDateM+"/"+decCerDateDateD+"/"+decCerDateY;
+	
+	var errDecCerDate=decCerDateY+"/"+decCerDateDateM+"/"+decCerDateDateD;
+		
+	var chkDecCerDate=new Date(decCerDate);
+	
+	
 	
 	/*if(odfHH==''){
 		odfHH=0;
@@ -1430,51 +1462,64 @@ if (localStorage.achPlanSector=="Sanitation" || localStorage.achPlanSector=="Han
 		}else if(epiComName=="") {
 			$(".errorChk").text("Required EPI Cluster/Community Name ");
 		}else if(odfStatus=="") {
-			$(".errorChk").text("Required ODF Status");
-		
+			$(".errorChk").text("Required ODF Status");		
 		}else if(odfHH=="" || odfHH<0) {
 			$(".errorChk").text("Required Number of HH");
 		}else if(odfAdult=="" || odfAdult<0) {
 			$(".errorChk").text("Required Adult");
 		}else if(odfChild=="" || odfChild<0) {
-			$(".errorChk").text("Required Children");
-			
+			$(".errorChk").text("Required Children");			
 		}else{
-			achWord=ach_word
-			achCluster=ach_cluster
-			achEpiComName=epiComName
-			achVillSubClusName=villSubClusName
-			achOdfStatus=odfStatus
+			if (isNaN(chkDecCerDate)==true){
+				date_flag=false;
+				dateError="Invalid Date of declaration/certification "+errDecCerDate;				
+			}else if (chkDecCerDate=='Invalid Date'){
+					date_flag=false;
+					dateError="Invalid Date of declaration/certification "+errDecCerDate;
+			}
 			
-			achHH=odfHH
-			achOdfAdult=odfAdult
-			achOdfChild=odfChild
+			if (date_flag==false){				
+				$(".errorChk").text(dateError);
+			}else{						
+				achWord=ach_word
+				achCluster=ach_cluster
+				achEpiComName=epiComName
+				achVillSubClusName=villSubClusName
+				achOdfStatus=odfStatus
+				achDateOfDecCer=decCerDate	
+				
+				achHH=odfHH
+				achOdfAdult=odfAdult
+				achOdfChild=odfChild
+				
+				
+				$.ajax({
+						type: 'POST',
+						url:apipath+'checkOdfStatus?cid=PLANBD&mobile_no='+localStorage.mobile_no+'&syncCode='+localStorage.sync_code+'&achWord='+achWord+'&achCluster='+achCluster+'&achOdfStatus='+achOdfStatus,
+						   
+						   success: function(result) {
+							   if(result=="Success"){
+								   var ach_plan_id=$("input[name='activity_select']:checked").val();
+									//alert(ach_plan_id);						
+									$(".errorChk").text("");
+									
+									var url="#inPhoto";
+									$.mobile.navigate(url);							  						  
+							   }else{
+								   $(".errorChk").text(result);								   
+								}
+				
+				
+						   }
+				});
 			
 			
-			
-			/*$.ajax({
-					type: 'POST',
-					url:apipath+'checkOdfStatus?cid=PLANBD&mobile_no='+localStorage.mobile_no+'&syncCode='+localStorage.sync_code+'&ach_plan_id='+localStorage.achPlanId+'&achWord='+achWord+'&achCluster='+achCluster+'&achWardNew='+achWardNew+'&achEpiComName='+encodeURIComponent(achEpiComName)+'&achVillSubClusName='+encodeURIComponent(achVillSubClusName)+'&achHhhName='+encodeURIComponent(achHhhName)+'&achID='+achID+'&achPopulation='+achPopulation+'&achMale='+achMale+'&achFemale='+achFemale+'&achGirls='+achGirls+'&achBoys='+achBoys+'&achDapMale='+achDapMale+'&achDapFemale='+achDapFemale+'&achLatType='+encodeURIComponent(achLatType)+'&achLatTypePast='+encodeURIComponent(achLatTypePast)+'&achComDate='+achComDate+"&achTypeOfSchool="+achTypeOfSchool+"&achNameOfSchool="+encodeURIComponent(achNameOfSchool)+"&achSchGirl="+achSchGirl+"&achSchBoy="+achSchBoy+"&achTeachFemale="+achTeachFemale+"&achTeachMale="+achTeachMale+"&achSchDFemale="+achSchDFemale+"&achSchDMale="+achSchDMale+"&achSchRehabInsDate="+achSchRehabInsDate+"&achSchWashCompDate="+achSchWashCompDate+'&achOdfStatus='+achOdfStatus+'&achHH='+achHH+'&achOdfAdult='+achOdfAdult+'&achOdfChild='+achOdfChild+'&achLatBoy='+achLatBoy+'&achLatGirl='+achLatGirl+'&achLatTeacher='+achLatTeacher+'&achLatBoysGirls='+achLatBoysGirls+'&achLatForAll='+achLatForAll+'&achNumOfTap='+achNumOfTap+'&achRecHyMsg='+achRecHyMsg+'&achLocationHwDev='+achLocationHwDev+'&achAvailableHwdev='+achAvailableHwdev+'&achAvailableSoap='+achAvailableSoap+'&latitude='+latitude+'&longitude='+longitude+'&ach_photo='+imageName+'&ach_startDt='+encodeURIComponent(localStorage.startDt)+'&achChkBudget='+achChkBudget+'&achAnlBudget='+achAnlBudget,
-					   
-					   success: function(result) {
-			
-			
-					   }
-			});*/
-			
-			
-			
-			
-			var ach_plan_id=$("input[name='activity_select']:checked").val();
-			//alert(ach_plan_id);						
-			$(".errorChk").text("");
-			
-			var url="#inPhoto";
-			$.mobile.navigate(url);	
+		  	}
 			
 		}			
 	}
 }
+
 
 
 
@@ -1685,7 +1730,7 @@ function achiveDataSave(){
 				
 								
 				//achivementSave=achPlanId+'fdfd'+achCBOid+'fdfd'+achID+'fdfd'+achPopulation+'fdfd'+achHousehold+'fdfd'+achMale+'fdfd'+achFemale+'fdfd'+achGirlsUnder+'fdfd'+achBoysUnder+'fdfd'+achGirls+'fdfd'+achBoys+'fdfd'+achDapMale+'fdfd'+achDapFemale+'fdfd'+achPoorA+'fdfd'+achPoorB+'fdfd'+achPoorC+'fdfd'+achPoorEx+'fdfd'+achEthMale+'fdfd'+achEthFemale+'fdfd'+achServiceRecpt+'fdfd'+achPlanActivities+'fdfd'+achPhoto+'fdfd'+startDt+'fdfd'+latitude+'fdfd'+longitude+'fdfd'+achWord+'fdfd'+achHndEvent+'fdfd'+achCluster+'fdfd'+achLatType+'fdfd'+achComDate+'fdfd'+achWpTech+'fdfd'+achWpComDate		
-				achivementSave=localStorage.achPlanId+'fdfd'+achWord+'fdfd'+achCluster+'fdfd'+achWardNew+'fdfd'+achEpiComName+'fdfd'+achVillSubClusName+'fdfd'+achHhhName+'fdfd'+achID+'fdfd'+achPopulation+'fdfd'+achMale+'fdfd'+achFemale+'fdfd'+achGirls+'fdfd'+achBoys+'fdfd'+achDapMale+'fdfd'+achDapFemale+'fdfd'+achLatType+'fdfd'+achComDate+'fdfd'+achTypeOfSchool+'fdfd'+nameOfpSchool+'fdfd'+nameOfsSchool+'fdfd'+achSchGirl+'fdfd'+achSchBoy+'fdfd'+achTeachFemale+'fdfd'+achTeachMale+'fdfd'+achSchDFemale+'fdfd'+achSchDMale+'fdfd'+achSchRehabInsDate+'fdfd'+achSchWashCompDate+'fdfd'+achOdfStatus+'fdfd'+localStorage.achPlanActivities+'fdfd'+achPhoto+'fdfd'+localStorage.startDt+'fdfd'+latitude+'fdfd'+longitude+'fdfd'+achLatTypePast+'fdfd'+achRecHyMsg+'fdfd'+achLocationHwDev+'fdfd'+achAvailableHwdev+'fdfd'+achAvailableSoap+'fdfd'+achLatBoy+'fdfd'+achLatGirl+'fdfd'+achLatTeacher+'fdfd'+achNumOfTap+'fdfd'+achHH+'fdfd'+achOdfAdult+'fdfd'+achOdfChild+'fdfd'+achLatBoysGirls+'fdfd'+achLatForAll+'fdfd'+achChkBudget+'fdfd'+achAnlBudget			
+				achivementSave=localStorage.achPlanId+'fdfd'+achWord+'fdfd'+achCluster+'fdfd'+achWardNew+'fdfd'+achEpiComName+'fdfd'+achVillSubClusName+'fdfd'+achHhhName+'fdfd'+achID+'fdfd'+achPopulation+'fdfd'+achMale+'fdfd'+achFemale+'fdfd'+achGirls+'fdfd'+achBoys+'fdfd'+achDapMale+'fdfd'+achDapFemale+'fdfd'+achLatType+'fdfd'+achComDate+'fdfd'+achTypeOfSchool+'fdfd'+nameOfpSchool+'fdfd'+nameOfsSchool+'fdfd'+achSchGirl+'fdfd'+achSchBoy+'fdfd'+achTeachFemale+'fdfd'+achTeachMale+'fdfd'+achSchDFemale+'fdfd'+achSchDMale+'fdfd'+achSchRehabInsDate+'fdfd'+achSchWashCompDate+'fdfd'+achOdfStatus+'fdfd'+localStorage.achPlanActivities+'fdfd'+achPhoto+'fdfd'+localStorage.startDt+'fdfd'+latitude+'fdfd'+longitude+'fdfd'+achLatTypePast+'fdfd'+achRecHyMsg+'fdfd'+achLocationHwDev+'fdfd'+achAvailableHwdev+'fdfd'+achAvailableSoap+'fdfd'+achLatBoy+'fdfd'+achLatGirl+'fdfd'+achLatTeacher+'fdfd'+achNumOfTap+'fdfd'+achHH+'fdfd'+achOdfAdult+'fdfd'+achOdfChild+'fdfd'+achLatBoysGirls+'fdfd'+achLatForAll+'fdfd'+achChkBudget+'fdfd'+achAnlBudget+'fdfd'+achDateOfDecCer			
 				
 				
 				if (localStorage.achPlanId==''){
@@ -1892,6 +1937,10 @@ function achiveDataSave(){
 						$("#schWash_conp_m").val("");
 						$("#schWash_conp_d").val("");
 						
+						$("#dec_or_cer_y").val("");
+						$("#dec_or_cer_m").val("");
+						$("#dec_or_cer_d").val("");
+						
 						reviewAchDisplayFlag==false;
 						arrayId=-1;
 						
@@ -2077,6 +2126,10 @@ function reviewAchiveData(){
 			$("#schWash_conp_y").val("");
 			$("#schWash_conp_m").val("");
 			$("#schWash_conp_d").val("");
+			
+			$("#dec_or_cer_y").val("");
+			$("#dec_or_cer_m").val("");
+			$("#dec_or_cer_d").val("");
 						
 			
 			reviewAchDisplayFlag==false;
@@ -2242,6 +2295,12 @@ function reviewDataNext(){
 		
 		$("#odf_total").val(eval(achRevDetailsArray[44])+eval(achRevDetailsArray[45]));
 		
+		if(achRevDetailsArray[50]!=undefined){
+			var schWashArr=achRevDetailsArray[50].split("/");
+			$("#dec_or_cer_y").val(schWashArr[2]);
+			$("#dec_or_cer_m").val(schWashArr[0]);
+			$("#dec_or_cer_d").val(schWashArr[1]);
+		}
 		
 		
 	
@@ -2309,7 +2368,7 @@ function syncDataAch(){
 			
 			$.ajax({
 					type: 'POST',
-					url:apipath+'submitAchiveData?cid=PLANBD&mobile_no='+localStorage.mobile_no+'&syncCode='+localStorage.sync_code+'&ach_plan_id='+localStorage.achPlanId+'&achWord='+achWord+'&achCluster='+achCluster+'&achWardNew='+achWardNew+'&achEpiComName='+encodeURIComponent(achEpiComName)+'&achVillSubClusName='+encodeURIComponent(achVillSubClusName)+'&achHhhName='+encodeURIComponent(achHhhName)+'&achID='+achID+'&achPopulation='+achPopulation+'&achMale='+achMale+'&achFemale='+achFemale+'&achGirls='+achGirls+'&achBoys='+achBoys+'&achDapMale='+achDapMale+'&achDapFemale='+achDapFemale+'&achLatType='+encodeURIComponent(achLatType)+'&achLatTypePast='+encodeURIComponent(achLatTypePast)+'&achComDate='+achComDate+"&achTypeOfSchool="+achTypeOfSchool+"&achNameOfSchool="+encodeURIComponent(achNameOfSchool)+"&achSchGirl="+achSchGirl+"&achSchBoy="+achSchBoy+"&achTeachFemale="+achTeachFemale+"&achTeachMale="+achTeachMale+"&achSchDFemale="+achSchDFemale+"&achSchDMale="+achSchDMale+"&achSchRehabInsDate="+achSchRehabInsDate+"&achSchWashCompDate="+achSchWashCompDate+'&achOdfStatus='+achOdfStatus+'&achHH='+achHH+'&achOdfAdult='+achOdfAdult+'&achOdfChild='+achOdfChild+'&achLatBoy='+achLatBoy+'&achLatGirl='+achLatGirl+'&achLatTeacher='+achLatTeacher+'&achLatBoysGirls='+achLatBoysGirls+'&achLatForAll='+achLatForAll+'&achNumOfTap='+achNumOfTap+'&achRecHyMsg='+achRecHyMsg+'&achLocationHwDev='+achLocationHwDev+'&achAvailableHwdev='+achAvailableHwdev+'&achAvailableSoap='+achAvailableSoap+'&latitude='+latitude+'&longitude='+longitude+'&ach_photo='+imageName+'&ach_startDt='+encodeURIComponent(localStorage.startDt)+'&achChkBudget='+achChkBudget+'&achAnlBudget='+achAnlBudget,
+					url:apipath+'submitAchiveData?cid=PLANBD&mobile_no='+localStorage.mobile_no+'&syncCode='+localStorage.sync_code+'&ach_plan_id='+localStorage.achPlanId+'&achWord='+achWord+'&achCluster='+achCluster+'&achWardNew='+achWardNew+'&achEpiComName='+encodeURIComponent(achEpiComName)+'&achVillSubClusName='+encodeURIComponent(achVillSubClusName)+'&achHhhName='+encodeURIComponent(achHhhName)+'&achID='+achID+'&achPopulation='+achPopulation+'&achMale='+achMale+'&achFemale='+achFemale+'&achGirls='+achGirls+'&achBoys='+achBoys+'&achDapMale='+achDapMale+'&achDapFemale='+achDapFemale+'&achLatType='+encodeURIComponent(achLatType)+'&achLatTypePast='+encodeURIComponent(achLatTypePast)+'&achComDate='+achComDate+"&achTypeOfSchool="+achTypeOfSchool+"&achNameOfSchool="+encodeURIComponent(achNameOfSchool)+"&achSchGirl="+achSchGirl+"&achSchBoy="+achSchBoy+"&achTeachFemale="+achTeachFemale+"&achTeachMale="+achTeachMale+"&achSchDFemale="+achSchDFemale+"&achSchDMale="+achSchDMale+"&achSchRehabInsDate="+achSchRehabInsDate+"&achSchWashCompDate="+achSchWashCompDate+'&achOdfStatus='+achOdfStatus+'&achHH='+achHH+'&achOdfAdult='+achOdfAdult+'&achOdfChild='+achOdfChild+'&achLatBoy='+achLatBoy+'&achLatGirl='+achLatGirl+'&achLatTeacher='+achLatTeacher+'&achLatBoysGirls='+achLatBoysGirls+'&achLatForAll='+achLatForAll+'&achNumOfTap='+achNumOfTap+'&achRecHyMsg='+achRecHyMsg+'&achLocationHwDev='+achLocationHwDev+'&achAvailableHwdev='+achAvailableHwdev+'&achAvailableSoap='+achAvailableSoap+'&latitude='+latitude+'&longitude='+longitude+'&ach_photo='+imageName+'&ach_startDt='+encodeURIComponent(localStorage.startDt)+'&achChkBudget='+achChkBudget+'&achAnlBudget='+achAnlBudget+'&achDateOfDecCer='+achDateOfDecCer,
 					   
 					   success: function(result) {
 							//alert(result);
