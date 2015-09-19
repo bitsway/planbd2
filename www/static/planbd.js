@@ -6,8 +6,8 @@ var latitudewq="";
 var longitudewq="";
 
 function getLocationInfoAch() {	
-
-	navigator.geolocation.getCurrentPosition(onSuccess, onError);		
+	var options = { enableHighAccuracy: false};	
+	navigator.geolocation.getCurrentPosition(onSuccess, onError, options);				
 	$(".errorChk").html("Confirming location. Please wait.");
 }
 // onSuccess Geolocation
@@ -819,6 +819,7 @@ function achDataNext2(){
 			$("#dec_or_cer_d").val(schWashArr[1]);
 		}
 		
+		
 		//----------------------------------------------------------------------------
 	
 	
@@ -1514,6 +1515,14 @@ if (localStorage.achPlanSector=="Sanitation" || localStorage.achPlanSector=="Han
 				});
 			
 			
+			
+			
+			/*var ach_plan_id=$("input[name='activity_select']:checked").val();
+			//alert(ach_plan_id);						
+			$(".errorChk").text("");
+			
+			var url="#inPhoto";
+			$.mobile.navigate(url);*/	
 		  	}
 			
 		}			
